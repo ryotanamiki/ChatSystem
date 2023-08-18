@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>相場計算ツール</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="chat">
+            <div class="icon-box">
+                <div class="icon-img"><img src="images/icon.png" alt="icon"></div>
+                <div id="firstQuestion" class="message response">2つの方法で相場を計算することができます。</div>
+                <div id="firstQuestion" class="message response">どちらがご希望に近いですか？</div>
+            </div>
+            <div id="box" class="box">
+                <div class="options">
+                    <button id="choiceA" onclick="showResponse('A')">
+                        <p>ざっくり計算</p>広さや形状から<br>おおまかに
+                    </button>
+                    <button id="choiceB" onclick="showResponse('B')">
+                        <p>しっかり計算</p>欲しい機能や<br>設備も入れて
+                    </button>
+                </div>
+            </div>
+            <div class="message response" id="response"></div>
+            <div class="image-wrapper">
+                <div class="img-container1">
+                    <div class="image drop" id="image2"></div>
+                    <div class="clearBox"></div>
+                    <div class="image" id="image"></div>
+                </div>
+                <div class="img-container2">
+                    <div class="image drop" id="image4"></div>
+                    <div class="clearBox"></div>
+                    <div class="image" id="image3"></div>
+                </div>
+            </div>
+            <div class="icon" id="icon"></div>
+            <div class="icons" id="icons"></div>
+            <div class="message response" id="final"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.29/dist/vue.global.js"></script>
+    <script src="vue.js"></script>
+</body>
+
+</html>
