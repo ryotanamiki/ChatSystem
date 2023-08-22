@@ -107,10 +107,13 @@ button:hover {
 }
 
 
-
 /*-------------------------
         アイコン
 -------------------------*/
+.message.response {
+    position: relative;
+}
+
 .icon-box {
     position: relative;
 }
@@ -124,17 +127,17 @@ button:hover {
 
 
 .icon {
-    width: 5%;
+    width: 3.5%;
     position: absolute;
-    top: 18%;
-    left: 17%;
+    top: 15%;
+    left: 27%;
 }
 
 .icons {
-    width: 5%;
+    width: 3.5%;
     position: absolute;
-    top: 58%;
-    left: 17%;
+    top: 47%;
+    left: 27%;
 }
 .icon-img img,
 .icon img,
