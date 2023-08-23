@@ -17,12 +17,6 @@ async function showResponse(choice) {
     chatContainer.insertBefore(userMessage, responseDiv, responseFinal);
 
     if (choice === 'A') {
-        await new Promise(resolve => setTimeout(resolve, 500));
-        const iconDiv = document.getElementById("icon");
-        const icon = document.createElement('img');
-        icon.src = 'images/icon.png';
-        iconDiv.appendChild(icon);
-
         await new Promise(resolve => setTimeout(resolve, 1500));
         const systemMessage = document.createElement('div');
         systemMessage.className = 'message response';
@@ -33,12 +27,6 @@ async function showResponse(choice) {
         responseDiv.innerHTML = "データをもとに、あなたの相場をざっくり計算します";
         responseDiv.style.display = 'block';
     } else if (choice === 'B') {
-        await new Promise(resolve => setTimeout(resolve, 500));
-        const iconDiv = document.getElementById("icon");
-        const icon = document.createElement('img');
-        icon.src = 'images/icon.png';
-        iconDiv.appendChild(icon);
-
         await new Promise(resolve => setTimeout(resolve, 1500));
         const systemMessage = document.createElement('div');
         systemMessage.className = 'message response';
@@ -74,12 +62,6 @@ async function showResponse(choice) {
         const image4 = document.createElement('img');
         image4.src = 'images/img04.png';
         imageDiv4.appendChild(image4);
-
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        const iconsDiv = document.getElementById("icons");
-        const icons = document.createElement('img');
-        icons.src = 'images/icon.png';
-        iconsDiv.appendChild(icons);
 
         await new Promise(resolve => setTimeout(resolve, 2000));
         responseFinal.innerHTML = "あなたの費用を、データをもとにしっかり計算します";

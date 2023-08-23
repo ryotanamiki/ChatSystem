@@ -44,32 +44,22 @@ p {
     float: left;
     color: #fff;
     margin-left: 5%;
+    position: relative;
+    padding-left: 40px;
 }
 
-.user::before,
-.response::before {
+    /*アイコン*/
+.response:before {
     content: "";
     position: absolute;
-    bottom: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    background-image: url('../images/icon.png');
+    background-size: cover;
 }
-
-.user::before {
-    border-width: 25px 25px 0 0;
-    border-color: transparent #069a98 transparent transparent;
-    bottom: -7px;
-    right: -7px;
-}
-
-.response::before {
-    border-width: 15px 0 0 15px;
-    border-color: transparent transparent transparent #3096d4;
-    left: -2px;
-    bottom: -2px;
-}
-
 
 .options {
     margin-top: 10px;
@@ -104,46 +94,6 @@ button:hover {
 #response.message.response,
 #final.message.response {
     display: none;
-}
-
-
-/*-------------------------
-        アイコン
--------------------------*/
-.message.response {
-    position: relative;
-}
-
-.icon-box {
-    position: relative;
-}
-
-.icon-img {
-    position: absolute;
-    width: 8%;
-    top: 0;
-    left: -7%;
-}
-
-
-.icon {
-    width: 3.5%;
-    position: absolute;
-    top: 15%;
-    left: 27%;
-}
-
-.icons {
-    width: 3.5%;
-    position: absolute;
-    top: 47%;
-    left: 27%;
-}
-.icon-img img,
-.icon img,
-.icons img {
-    width: 100%;
-    border-radius: 50%;
 }
 
 
