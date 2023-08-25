@@ -48,7 +48,7 @@ p {
     padding-left: 40px;
 }
 
-    /*アイコン*/
+        /* アイコン */
 .response:before {
     content: "";
     position: absolute;

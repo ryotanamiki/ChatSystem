@@ -10,7 +10,7 @@ async function showResponse(choice) {
     choiceBButton.style.display = 'none';
     choiceBox.style.display = 'none';
 
-    // ユーザーのメッセージをチャットに表示
+    /*ユーザーのメッセージをチャットに表示*/
     const userMessage = document.createElement('div');
     userMessage.className = 'message user';
     userMessage.textContent = (choice === 'A' ? 'ざっくり計算です' : 'しっかり計算です');
