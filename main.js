@@ -119,7 +119,7 @@ async function showResponse(choice) {
 
         const systemMessage2 = document.createElement('div');
         systemMessage2.className = 'message response';
-        systemMessage2.textContent = '一戸建てお風呂のリフォーム相場は';
+        systemMessage2.textContent = 'お風呂のリフォーム相場は';
         chatContainer.insertBefore(systemMessage2, responseDiv, responseFinal);
 
         await new Promise(resolve => setTimeout(resolve, 1500));
