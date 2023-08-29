@@ -66,17 +66,20 @@ p {
 }
 
         /* アイコン */
-.icons {
-    content: "";
-    position: absolute;
-    top: 5%;
-        left: 140px;
-    transform: translateY(-50%);
-    width: 60px;
+        .icon-box {
+            position: relative;
+        }
+        .icons {
+            content: "";
+            position: absolute;
+            top: 5%;
+        left: -55px;
+            transform: translateY(-50%);
+            width: 60px;
         height: 60px;
-    background-image: url('../images/icon.png');
-    background-size: cover;
-    border-radius: 50%;
+        background-image: url('../images/icon.png');
+            background-size: cover;
+            border-radius: 50%;
     }
     
     .message.icon::before {
@@ -94,7 +97,7 @@ p {
 
 .icon:nth-child(8)::before,
 .icon:nth-child(7)::before,
-.icon:nth-child(10)::before {
+.icon:nth-child(6)::before {
     background-image: none;
 }
 .options {
