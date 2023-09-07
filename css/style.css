@@ -52,7 +52,7 @@ p {
     padding-left: 5px;
         text-align: center;
     }
-    
+
     .response:after {
         content: "";
         display: inline-block;
@@ -81,7 +81,7 @@ p {
             background-size: cover;
             border-radius: 50%;
     }
-    
+
     .message.icon::before {
         content: "";
         position: absolute;
@@ -137,7 +137,7 @@ button:hover {
 }
 
 /*-------------------------
-  チャット読み込みアニメーション
+チャット読み込みアニメーション
 -------------------------*/
 @keyframes dotsAnimation {
 
