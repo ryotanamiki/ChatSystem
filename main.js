@@ -123,8 +123,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     //セットの関数
-    async function displaySetMessage(message, container = {}) {
-        const { icon = true, displayButtons = true } = container;
+    async function displaySetMessage(message, icon = true) {
     await delayAll(1000);
     const loadingMessage = document.createElement('div');
     loadingMessage.classList.add('message', 'system-message', 'loading',  'hide-icon');
@@ -156,7 +155,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     hideButtons(buttonB);
 
     await displaySetMessage('2つの方法で計算することができます。');
-    await displaySetMessage('どちらがご希望に近いですか？', { icon: false });
+    await displaySetMessage('どちらがご希望に近いですか？', false);
 
     await delay(1000);
     showButtons(buttonA);
@@ -188,8 +187,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             await displaySetMessage('かしこまりました。');
             await displaySetMessage('お風呂リフォームの相場は', false);
             displayImages();
+            await delay(5000)
             await displaySetMessage('あなたの費用を、データをもとにしっかり計算します。');
-            await displaySetMessage('希望されるお風呂は、どのような形式ですか？');
+            await displaySetMessage('希望されるお風呂は、どのような形式ですか？', false);
             displayButtons([
                 { id: 'img05', image: 'images/img05.png', text: 'ユニットバス' },
                 { id: 'img06', image: 'images/img06.png', text: 'タイル貼り' },
@@ -199,28 +199,28 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
 
     //ボタンの中身
-    async function displayButtons(buttonData) {
-        await delay(1500);
-        const chatContainer = document.querySelector('.chat-container');
-        const buttonContainer = document.createElement('div');
-        buttonContainer.classList.add('message', 'system-message', 'button-container');
+async function displayButtons(buttonData) {
+    await delay(1500);
+    const chatContainer = document.querySelector('.chat-container');
+    const buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('message', 'system-message', 'button-container');
 
-        buttonData.forEach(data => {
-            const button = document.createElement('div');
-            button.classList.add('button2');
-            button.id = data.id;
+    buttonData.forEach(data => {
+        const button = document.createElement('div');
+        button.classList.add('button2');
+        button.id = data.id;
 
-            const image = document.createElement('img');
-            image.src = data.image;
-            button.appendChild(image);
+        const image = new Image();
+        image.src = data.image;
 
-            const text = document.createElement('span');
-            text.textContent = data.text;
-            button.appendChild(text);
+        const text = document.createElement('span');
+        text.textContent = data.text;
 
-            buttonContainer.appendChild(button);
-        });
-        chatContainer.appendChild(buttonContainer);
+        button.append(image, text);
+        buttonContainer.appendChild(button);
+    });
+
+    chatContainer.appendChild(buttonContainer);
 
         //ボタンクリックイベント
         buttonContainer.addEventListener('click', async function (event) {
@@ -351,6 +351,37 @@ document.addEventListener('DOMContentLoaded', async function () {
     //地方選択後の処理
     async function displayButtons2(buttonData2) {
         await delay(1000);
+        const chatContainer = document.querySelector('.chat-container');
+        const buttonContainer2 = document.createElement('div');
+        buttonContainer2.classList.add('message', 'system-message', 'button-container2');
+
+        buttonData2.forEach(data => {
+            const button3 = document.createElement('div');
+            button3.classList.add('button3');
+            button3.id = data.id;
+
+            const text = document.createElement('span');
+            text.textContent = data.text;
+            button3.appendChild(text);
+
+            buttonContainer2.appendChild(button3);
+        });
+
+        chatContainer.appendChild(buttonContainer2);
+
+        buttonContainer2.addEventListener('click', async function (event) {
+            const targetBtn = event.target.closest('.button3');
+            const btnId = targetBtn.id;
+
+            if (btnId in buttonTextMapping) {
+                displayButtons2(buttonTextMapping[btnId]);
+            } else {
+                const messageText = getDisplayText(btnId);
+                displayUserMessage(messageText);
+            }
+
+            buttonContainer2.style.display = 'none';
+        });
 
         const buttonTextMapping = {
             't1': [
@@ -416,39 +447,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                 { id: 't61', text: '沖縄県' }
             ],
         };
-
-        const chatContainer = document.querySelector('.chat-container');
-        const buttonContainer2 = document.createElement('div');
-        buttonContainer2.classList.add('message', 'system-message', 'button-container2');
-
-        buttonData2.forEach(data => {
-            const button3 = document.createElement('div');
-            button3.classList.add('button3');
-            button3.id = data.id;
-
-            const text = document.createElement('span');
-            text.textContent = data.text;
-            button3.appendChild(text);
-
-            buttonContainer2.appendChild(button3);
-        });
-
-        chatContainer.appendChild(buttonContainer2);
-
-        buttonContainer2.addEventListener('click', async function (event) {
-            const targetBtn = event.target.closest('.button3');
-            const btnId = targetBtn.id;
-
-            if (btnId in buttonTextMapping) {
-                displayButtons2(buttonTextMapping[btnId]);
-            } else {
-                const messageText = getDisplayText(btnId);
-                displayUserMessage(messageText);
-            }
-
-            buttonContainer2.style.display = 'none';
-        });
     }
+//都道府県選択後のユーザーメッセージ
     function getDisplayText(btnId) {
         const textMapping = {
             't9': '北海道です',
