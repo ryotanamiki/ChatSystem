@@ -1,20 +1,19 @@
 //ロードアニメーション
-async function animateDots(element) {
-    const dots = element.textContent.split('');
-    element.textContent = '';
+async function animateDots(element, ms = 500) {
+    const dotsContainer = document.createElement('div');
+    dotsContainer.classList.add('dots-container');
 
-    for (let i = 0; i < dots.length; i++) {
+    for (let i = 0; i < 3; i++) {
         const dot = document.createElement('span');
-        dot.textContent = dots[i];
-        dot.style.animation = `dotsAnimation 1s ${i * 0.6}s infinite`;
-        element.appendChild(dot);
-
-        if (i !== dots.length - 1) {
-            const spacer = document.createTextNode(' ');
-            element.appendChild(spacer);
-        }
+        dot.classList.add('dot', `dot-${i}`);
+        dotsContainer.appendChild(dot);
     }
+
+    element.appendChild(dotsContainer);
+
+    await isDelay(ms);
 }
+
 //グラフイメージ
 async function displayImages() {
     const chatContainer = document.querySelector('.chat-container');
@@ -52,6 +51,9 @@ function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 async function isDelay(ms) {
+    await delay(ms);
+}
+async function delayAll(ms = 1000) {
     await delay(ms);
 }
 //メイン
@@ -105,33 +107,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         chatContainer.appendChild(systemMessage);
     }
 
-    // ローディングメッセージを表示
-    async function displayLoadingMessage(message) {
-        const chatContainer = document.querySelector('.chat-container');
-        const loadingMessage = document.createElement('div');
-        loadingMessage.classList.add('message', 'system-message', 'loading');
-        loadingMessage.innerHTML = `<div class='load'>${message}</div>`;
-
-        const icon = document.createElement('img');
-        icon.src = '/images/icon.png';
-        icon.classList.add('icons');
-
-        loadingMessage.appendChild(icon);
-
-        chatContainer.appendChild(loadingMessage);
-        await animateDots(loadingMessage.querySelector('.load'));
-    }
-    //アイコン無しローディングメッセージ
-    async function loadingMessageIcon(message) {
-        const chatContainer = document.querySelector('.chat-container');
-        const loadingMessage = document.createElement('div');
-        loadingMessage.classList.add('message', 'system-message', 'loading', 'hide-icon');
-        loadingMessage.innerHTML = `<div class='load'>${message}</div>`;
-
-        chatContainer.appendChild(loadingMessage);
-        await animateDots(loadingMessage.querySelector('.load'));
-    }
-
     // ユーザーメッセージを表示
     function displayUserMessage(message) {
         const chatContainer = document.querySelector('.chat-container');
@@ -142,36 +117,46 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     // ディレイの非同期関数
-    async function delayAndHideLoadingMessage(delayTime) {
+    async function delayAndHideLoadingMessage(delayTime = 1000) {
         await delay(delayTime);
         hideLoadingMessage();
     }
 
     //セットの関数
-    async function displaySetMessage(ms, message, delayTime, systemMessage,) {
-        await isDelay(ms);
-        displayLoadingMessage(message);
-        await delayAndHideLoadingMessage(delayTime);
-        if (systemMessage) {
-            displaySystemMessage(systemMessage);
+    async function displaySetMessage(message, container = {}) {
+        const { icon = true, displayButtons = true } = container;
+    await delayAll(1000);
+    const loadingMessage = document.createElement('div');
+    loadingMessage.classList.add('message', 'system-message', 'loading',  'hide-icon');
+    loadingMessage.innerHTML = `<div class='load'></div>`;
+
+    if (icon) {
+        const icon = document.createElement('img');
+        icon.src = '/images/icon.png';
+        icon.classList.add('icons');
+        loadingMessage.appendChild(icon);
+    }
+
+    const chatContainer = document.querySelector('.chat-container');
+    chatContainer.appendChild(loadingMessage);
+
+    await animateDots(loadingMessage.querySelector('.load'));
+    await delayAndHideLoadingMessage(1000);
+    if (message) {
+        if (icon) {
+            displaySystemMessage(message);
+        } else {
+            systemIconMessage(message);
         }
     }
-    //アイコン無しセットの関数
-    async function displayNotIconSetMessage(ms, message, delayTime, systemMessage) {
-        await isDelay(ms);
-        loadingMessageIcon(message);
-        await delayAndHideLoadingMessage(delayTime);
-        if (systemMessage) {
-            systemIconMessage(systemMessage);
-        }
-    }
+}
 
     // 初期非表示のボタンを表示
     hideButtons(buttonA);
     hideButtons(buttonB);
 
-    await displaySetMessage(1000, '・・・', 1000, '2つの方法で計算することができます。');
-    await displayNotIconSetMessage(1000, '・・・', 1000, 'どちらがご希望に近いですか？');
+    await displaySetMessage('2つの方法で計算することができます。');
+    await displaySetMessage('どちらがご希望に近いですか？', { icon: false });
 
     await delay(1000);
     showButtons(buttonA);
@@ -183,9 +168,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             displayUserMessage('ざっくり計算です');
             const btn = document.querySelector('.buttonContainer');
             btn.style.display = 'none';
-            await displaySetMessage(1000, '・・・', 1000, 'かしこまりました。');
-            await displayNotIconSetMessage(1000, '・・・', 1000, 'データを元に、あなたの相場をざっくり計算します。');
-            await displaySetMessage(1000, '・・・', 1000, '希望されるお風呂は、どのような形式ですか？');
+            await displaySetMessage('かしこまりました。');
+            await displaySetMessage('データを元に、あなたの相場をざっくり計算します。', false);
+            await displaySetMessage('希望されるお風呂は、どのような形式ですか？');
             displayButtons([
                 { id: 'img05', image: 'images/img05.png', text: 'ユニットバス' },
                 { id: 'img06', image: 'images/img06.png', text: 'タイル貼り' },
@@ -200,11 +185,11 @@ document.addEventListener('DOMContentLoaded', async function () {
             displayUserMessage('しっかり計算です')
             const btn = document.querySelector('.buttonContainer');
             btn.style.display = 'none';
-            await displaySetMessage(1000, '・・・', 1000, 'かしこまりました。');
-            await displayNotIconSetMessage(1000, '・・・', 1000, 'お風呂リフォームの相場は');
+            await displaySetMessage('かしこまりました。');
+            await displaySetMessage('お風呂リフォームの相場は', false);
             displayImages();
-            await displaySetMessage(6000, '・・・', 1000, 'あなたの費用を、データをもとにしっかり計算します。');
-            await displayNotIconSetMessage(1000, '・・・', 1000, '希望されるお風呂は、どのような形式ですか？');
+            await displaySetMessage('あなたの費用を、データをもとにしっかり計算します。');
+            await displaySetMessage('希望されるお風呂は、どのような形式ですか？');
             displayButtons([
                 { id: 'img05', image: 'images/img05.png', text: 'ユニットバス' },
                 { id: 'img06', image: 'images/img06.png', text: 'タイル貼り' },
@@ -279,76 +264,76 @@ document.addEventListener('DOMContentLoaded', async function () {
             buttonContainer.style.display = 'none';
 
             if (btnId === 'img05' || btnId === 'img06' || btnId === 'imgQ') {
-                await displaySetMessage(1000, '・・・', 1000, '希望されるお風呂の大きさは、どのくらいですか？');
+                await displaySetMessage('希望されるお風呂の大きさは、どのくらいですか？');
                 displayButtons([
                     { id: 'img07', image: 'images/img07.png', text: '2畳未満' },
                     { id: 'img08', image: 'images/img08.png', text: '2畳以上' },
                     { id: 'imgQ2', image: 'images/imgQ.png', text: 'わからない' }
                 ]);
             } else if (btnId === 'img07' || btnId === 'img08' || btnId === 'imgQ2') {
-                await displaySetMessage(1000, '・・・', 1000, '浴槽まわりの希望をお伺いします。');
-                await displaySetMessage(1000, '・・・', 1000, '湯煎に浸かる頻度が多い場合は、浴槽の形が重要です。');
-                await displayNotIconSetMessage(1000, '・・・', 1000, '浴槽の形にこだわりはありますか？');
+                await displaySetMessage('浴槽まわりの希望をお伺いします。');
+                await displaySetMessage('湯煎に浸かる頻度が多い場合は、浴槽の形が重要です。');
+                await displaySetMessage('浴槽の形にこだわりはありますか？', false);
                 displayButtons([
                     { id: 'img09', image: '', text: '広さ重視' },
                     { id: 'img10', image: '', text: '節水重視' },
                     { id: 'imgN', image: '', text: 'とくになし' }
                 ]);
             } else if (btnId === 'img09' || btnId === 'img10' || btnId === 'imgN') {
-                await displaySetMessage(1000, '・・・', 1000, 'お湯の冷めにくい、保温効果のある浴槽を希望されますか？');
+                await displaySetMessage('お湯の冷めにくい、保温効果のある浴槽を希望されますか？');
                 displayButtons([
                     { id: 'img11', image: '', text: 'はい' },
                     { id: 'img12', image: '', text: '興味あり' },
                     { id: 'imgN2', image: '', text: 'いいえ' }
                 ]);
             } else if (btnId === 'img11' || btnId === 'img12' || btnId === 'imgN2') {
-                await displaySetMessage(1000, '・・・', 1000, 'リラックス・マッサージ効果のある、バブルバス・ジェットバスをご希望されますか？');
+                await displaySetMessage('リラックス・マッサージ効果のある、バブルバス・ジェットバスをご希望されますか？');
                 displayButtons([
                     { id: 'img13', image: '', text: 'はい' },
                     { id: 'img14', image: '', text: '興味あり' },
                     { id: 'imgN3', image: '', text: 'いいえ' }
                 ]);
             } else if (btnId === 'img13' || btnId === 'img14' || btnId === 'imgN3') {
-                await displaySetMessage(1000, '・・・', 1000, 'お風呂に埋込み型のオーディオを設置すると、音の広がりがよく、また見た目もスッキリします。');
-                await displayNotIconSetMessage(1000, '・・・', 1000, 'お風呂にオーディオの設置を希望されますか？');
+                await displaySetMessage('お風呂に埋込み型のオーディオを設置すると、音の広がりがよく、また見た目もスッキリします。');
+                await displaySetMessage('お風呂にオーディオの設置を希望されますか？', false);
                 displayButtons([
                     { id: 'img15', image: '', text: 'はい' },
                     { id: 'img16', image: '', text: '興味あり' },
                     { id: 'imgN4', image: '', text: 'いいえ' }
                 ]);
             } else if (btnId === 'img15' || btnId === 'img16' || btnId === 'imgN4') {
-                await displaySetMessage(1000, '・・・', 1000, 'ゆったりお風呂に浸かりながら、最大24インチの大迫力の画面でテレビを楽しむこともできます。');
-                await displayNotIconSetMessage(1000, '・・・', 1000, 'お風呂にテレビの設置を希望されますか？。');
+                await displaySetMessage('ゆったりお風呂に浸かりながら、最大24インチの大迫力の画面でテレビを楽しむこともできます。');
+                await displaySetMessage('お風呂にテレビの設置を希望されますか？', false);
                 displayButtons([
                     { id: 'img17', image: '', text: 'はい' },
                     { id: 'img18', image: '', text: '興味あり' },
                     { id: 'imgN5', image: '', text: 'いいえ' }
                 ]);
             } else if (btnId === 'img17' || btnId === 'img18' || btnId === 'imgN5') {
-                await displaySetMessage(1000, '・・・', 1000, '設置する照明にこだわると、利用シーンに合わせて浴室の雰囲気を手軽にかえることができます');
-                await displayNotIconSetMessage(1000, '・・・', 1000, '機能的な照明をご希望されますか？');
+                await displaySetMessage('設置する照明にこだわると、利用シーンに合わせて浴室の雰囲気を手軽にかえることができます');
+                await displaySetMessage('機能的な照明をご希望されますか？', false);
                 displayButtons([
                     { id: 'img19', image: '', text: 'はい' },
                     { id: 'img20', image: '', text: '興味あり' },
                     { id: 'imgN6', image: '', text: 'いいえ' }
                 ]);
             } else if (btnId === 'img19' || btnId === 'img20' || btnId === 'imgN6') {
-                await displaySetMessage(1000, '・・・', 1000, '湯船に浸かる人が複数いたり、利用時間がバラバラな場合は、追い焚き機能が便利です。');
-                await displayNotIconSetMessage(1000, '・・・', 1000, '追い焚き機能をご希望されますか？');
+                await displaySetMessage('湯船に浸かる人が複数いたり、利用時間がバラバラな場合は、追い焚き機能が便利です。');
+                await displaySetMessage('追い焚き機能をご希望されますか？', false);
                 displayButtons([
                     { id: 'img21', image: '', text: 'はい' },
                     { id: 'img22', image: '', text: '興味あり' },
                     { id: 'imgN7', image: '', text: 'いいえ' }
                 ]);
             } else if (btnId === 'img21' || btnId === 'img22' || btnId === 'imgN7') {
-                await displaySetMessage(1000, '・・・', 1000, 'リビングの家族を呼び出したり会話ができるインターフォンの設置を希望しますか？');
+                await displaySetMessage('リビングの家族を呼び出したり会話ができるインターフォンの設置を希望しますか？');
                 displayButtons([
                     { id: 'img23', image: '', text: 'はい' },
                     { id: 'img24', image: '', text: '興味あり' },
                     { id: 'imgN8', image: '', text: 'いいえ' }
                 ]);
             } else if (btnId === 'img23' || btnId === 'img24' || btnId === 'imgN8') {
-                await displaySetMessage(1000, '・・・', 1000, '物件の場所はどちらになりますか？');
+                await displaySetMessage('物件の場所はどちらになりますか？');
                 displayButtons2([
                     { id: 't1', text: '北海道・東北' },
                     { id: 't2', text: '関東' },

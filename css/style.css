@@ -207,38 +207,68 @@ footer {
 }
 
 /*-------------------------
-                ローディングアニメーション
+ローディングアニメーション
 -------------------------*/
-@keyframes dotsAnimation {
+@keyframes dotsAnimation-0 {
+    0% {
+        opacity: 0;
+    }
 
-    0%,
-    100% {
-        transform: translateY(0);
+                100% {
         opacity: 1;
     }
-
-    25% {
-        transform: translateY(-10px);
-        opacity: 0.6;
-    }
-
-    50% {
-        transform: translateY(10px);
-        opacity: 0.3;
-    }
-
-    75% {
-        transform: translateY(-5px);
-        opacity: 0.8;
-    }
 }
 
-.dots-animation {
-    animation: dotsAnimation 1s infinite;
+@keyframes dotsAnimation-1 {
+    0% {
+        opacity: 0;
+    }
+
+                100% {
+                    opacity: 1;
+                }
+                }
+        
+                @keyframes dotsAnimation-2 {
+                    0% {
+                        opacity: 0;
+                    }
+        
+                    100% {
+                        opacity: 1;
+                    }
+                }
+        
+                .dots-container {
+                    display: inline-block;
+                }
+
+.dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin: 10px 5px 10px 5px;
+    background-color: #fff;
+    border-radius: 50%;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+.dot-0 {
+    animation-name: dotsAnimation-0;
 }
 
+.dot-1 {
+    animation-name: dotsAnimation-1;
+    animation-delay: 0.2s;
+}
+
+.dot-2 {
+    animation-name: dotsAnimation-2;
+    animation-delay: 0.4s;
+}
 /*-------------------------
-                                グラフイメージ
+グラフイメージ
 -------------------------*/
 .image-container {
     width: 100%;
