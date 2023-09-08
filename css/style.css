@@ -228,17 +228,17 @@ footer {
                     opacity: 1;
                 }
                 }
-        
+
                 @keyframes dotsAnimation-2 {
                     0% {
                         opacity: 0;
                     }
-        
+
                     100% {
                         opacity: 1;
                     }
                 }
-        
+
                 .dots-container {
                     display: inline-block;
                 }
