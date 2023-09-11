@@ -113,14 +113,14 @@ document.addEventListener('DOMContentLoaded', async function () {
         chatContainer.appendChild(userMessage);
     }
 
-    // ディレイの非同期関数
-    async function delayAndHideLoadingMessage(delayTime = 1000) {
-        await delay(delayTime);
-        hideLoadingMessage();
-    }
+// ディレイの非同期関数
+async function delayAndHideLoadingMessage(delayTime = 1000) {
+    await delay(delayTime);
+    hideLoadingMessage();
+}
 
-    //セットの関数
-    async function displaySetMessage(message, icon = true) {
+//セットの関数
+async function displaySetMessage(message, icon = true) {
     await delayAll(1000);
     const loadingMessage = document.createElement('div');
     loadingMessage.classList.add('message', 'system-message', 'loading',  'hide-icon');
@@ -226,7 +226,6 @@ async function displayButtons(buttonData) {
                 const btnId = targetButton.id;
                 const buttonText = targetButton.querySelector('span').textContent;
 
-                // ボタンのテキストを表示
                 displayUserMessage(buttonText);
 
                 buttonContainer.style.display = 'none';
@@ -317,7 +316,7 @@ async function displayButtons(buttonData) {
     }
 
     //地方選択後の処理
-    async function displayButtons2(buttonData2) {
+async function displayButtons2(buttonData2) {
         await delay(1000);
         const chatContainer = document.querySelector('.chat-container');
         const buttonContainer2 = document.createElement('div');
@@ -416,14 +415,14 @@ async function displayButtons(buttonData) {
             ],
         };
 
-function getDisplayText(btnId) {
-    for (const key in buttonTextMapping) {
-        const mappings = buttonTextMapping[key];
-        const mapping = mappings.find(mapping => mapping.id === btnId);
+    function getDisplayText(btnId) {
+        for (const key in buttonTextMapping) {
+            const mappings = buttonTextMapping[key];
+            const mapping = mappings.find(mapping => mapping.id === btnId);
         if (mapping) {
             return mapping.text;
         }
+        }
     }
 }
-    }
 });
