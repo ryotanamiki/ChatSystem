@@ -237,7 +237,29 @@ async function displaySetMessage(message, icon = true) {
             clickHandler(selectedText);
         });
     });
-}
+    }
+//システムメッセージの配列
+    const messagesDisplay = [
+        { message: 'かしこまりました。', useIcon: true },
+        { message: 'データを元に、あなたの相場をざっくり計算します。', useIcon: false },
+        { message: '希望されるお風呂は、どのような形式ですか？', useIcon: true },
+        { message: '希望されるお風呂の大きさは、どのくらいですか？。', useIcon: true },
+        { message: '浴槽まわりの希望をお伺いします。', useIcon: true },
+        { message: '湯煎に浸かる頻度が多い場合は、浴槽の形が重要です。', useIcon: true },
+        { message: '浴槽の形にこだわりはありますか？', useIcon: false },
+        { message: 'お湯の冷めにくい、保温効果のある浴槽を希望されますか？', useIcon: true },
+        { message: 'リラックス・マッサージ効果のある、バブルバス・ジェットバスをご希望されますか？', useIcon: true },
+        { message: 'お風呂に埋込み型のオーディオを設置すると、音の広がりがよく、また見た目もスッキリします。', useIcon: true },
+        { message: 'お風呂にオーディオの設置を希望されますか？', useIcon: false },
+        { message: 'ゆったりお風呂に浸かりながら、最大24インチの大迫力の画面でテレビを楽しむこともできます。', useIcon: true },
+        { message: 'お風呂にテレビの設置を希望されますか？', useIcon: false },
+        { message: '設置する照明にこだわると、利用シーンに合わせて浴室の雰囲気を手軽にかえることができます', useIcon: true },
+        { message: '機能的な照明をご希望されますか？', useIcon: false },
+        { message: '湯船に浸かる人が複数いたり、利用時間がバラバラな場合は、追い焚き機能が便利です。', useIcon: true },
+        { message: '追い焚き機能をご希望されますか？', useIcon: false },
+        { message: 'リビングの家族を呼び出したり会話ができるインターフォンの設置を希望しますか？', useIcon: true },
+        { message: '物件の場所はどちらになりますか？', useIcon: true },
+    ];
 /*------------------初期メッセージ------------------------- */
     await displaySetMessage('2つの方法で計算することができます。');
     await displaySetMessage('どちらがご希望に近いですか？', false);
@@ -251,10 +273,11 @@ async function buttonAClick(selectedText) {
     displayUserMessage(selectedText);
 
     hideButtons(buttonA); hideButtons(buttonB);
-
-    await displaySetMessage('かしこまりました');
-    await displaySetMessage('データを元に、あなたの相場をざっくり計算します。', false);
-    await displaySetMessage('希望されるお風呂は、どのような形式ですか？');
+    const indicesToDisplay = [0, 1, 2];
+    for (const index of indicesToDisplay) {
+        const messageDisplay = messagesDisplay[index];
+        await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
+    }
     await showFlex(buttons);
 }
 addClickHandle(buttonA, buttonAClick);
@@ -280,8 +303,9 @@ async function selectAClick(selectedText) {
 
     hideButtons(buttons);
 
-    await displaySetMessage('希望されるお風呂の大きさは、どのくらいですか？');
-    await showFlex(buttons2);
+    const messageDisplay = messagesDisplay[3];
+    await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
+    showFlex(buttons2);
 }
 addClickHandle(selectA, selectAClick); addClickHandle(selectB, selectAClick); addClickHandle(selectC, selectAClick);
 /*------------------お風呂の大きさ------------------------- */
@@ -290,9 +314,11 @@ async function selectBClick(selectedText) {
 
     hideButtons(buttons2);
 
-    await displaySetMessage('浴槽まわりの希望をお伺いします。');
-    await displaySetMessage('湯煎に浸かる頻度が多い場合は、浴槽の形が重要です。');
-    await displaySetMessage('浴槽の形にこだわりはありますか？', false);
+    const indicesToDisplay = [4, 5, 6];
+    for (const index of indicesToDisplay) {
+        const messageDisplay = messagesDisplay[index];
+        await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
+    }
     showFlex(buttons3);
 }
 addClickHandle(selectD, selectBClick); addClickHandle(selectE, selectBClick); addClickHandle(selectF, selectBClick);
@@ -301,7 +327,8 @@ async function selectCClick(selectedText) {
     displayUserMessage(selectedText);
 
     hideButtons(buttons3);
-    await displaySetMessage('お湯の冷めにくい、保温効果のある浴槽を希望されますか？');
+    const messageDisplay = messagesDisplay[7];
+    await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
     showFlex(buttons4);
 }
 addClickHandle(selectG, selectCClick); addClickHandle(selectH, selectCClick); addClickHandle(selectI, selectCClick);
@@ -310,7 +337,8 @@ async function selectDClick(selectedText) {
     displayUserMessage(selectedText);
 
     hideButtons(buttons4);
-    await displaySetMessage('リラックス・マッサージ効果のある、バブルバス・ジェットバスをご希望されますか？');
+    const messageDisplay = messagesDisplay[8];
+    await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
     showFlex(buttons5);
 }
 addClickHandle(selectJ, selectDClick); addClickHandle(selectK, selectDClick); addClickHandle(selectL, selectDClick)
@@ -319,8 +347,11 @@ async function selectEClick(selectedText) {
     displayUserMessage(selectedText);
 
     hideButtons(buttons5);
-    await displaySetMessage('お風呂に埋込み型のオーディオを設置すると、音の広がりがよく、また見た目もスッキリします。');
-    await displaySetMessage('お風呂にオーディオの設置を希望されますか？', false);
+    const indicesToDisplay = [9, 10];
+    for (const index of indicesToDisplay) {
+        const messageDisplay = messagesDisplay[index];
+        await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
+    }
     showFlex(buttons6);
 }
 addClickHandle(selectM, selectEClick); addClickHandle(selectN, selectEClick); addClickHandle(selectO, selectEClick);
@@ -329,8 +360,11 @@ async function selectFClick(selectedText) {
     displayUserMessage(selectedText);
 
     hideButtons(buttons6);
-    await displaySetMessage('ゆったりお風呂に浸かりながら、最大24インチの大迫力の画面でテレビを楽しむこともできます。');
-    await displaySetMessage('お風呂にテレビの設置を希望されますか？', false);
+    const indicesToDisplay = [11, 12];
+    for (const index of indicesToDisplay) {
+        const messageDisplay = messagesDisplay[index];
+        await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
+    }
     showFlex(buttons7);
 }
 addClickHandle(selectP, selectFClick); addClickHandle(selectQ, selectFClick); addClickHandle(selectR, selectFClick);
@@ -339,8 +373,11 @@ async function selectGClick(selectedText) {
     displayUserMessage(selectedText);
 
     hideButtons(buttons7);
-    await displaySetMessage('設置する照明にこだわると、利用シーンに合わせて浴室の雰囲気を手軽にかえることができます');
-    await displaySetMessage('機能的な照明をご希望されますか？', false);
+    const indicesToDisplay = [13, 14];
+    for (const index of indicesToDisplay) {
+        const messageDisplay = messagesDisplay[index];
+        await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
+    }
     showFlex(buttons8);
 }
 addClickHandle(selectS, selectGClick); addClickHandle(selectT, selectGClick); addClickHandle(selectU, selectGClick);
@@ -349,8 +386,11 @@ async function selectHClick(selectedText) {
     displayUserMessage(selectedText);
 
     hideButtons(buttons8);
-    await displaySetMessage('湯船に浸かる人が複数いたり、利用時間がバラバラな場合は、追い焚き機能が便利です。');
-    await displaySetMessage('追い焚き機能をご希望されますか？', false);
+    const indicesToDisplay = [15, 16];
+    for (const index of indicesToDisplay) {
+        const messageDisplay = messagesDisplay[index];
+        await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
+    }
     showFlex(buttons9);
 }
 addClickHandle(selectV, selectHClick); addClickHandle(selectW, selectHClick); addClickHandle(selectX, selectHClick);
@@ -359,7 +399,8 @@ async function selectIClick(selectedText) {
     displayUserMessage(selectedText);
 
     hideButtons(buttons9);
-    await displaySetMessage('リビングの家族を呼び出したり会話ができるインターフォンの設置を希望しますか？');
+    const messageDisplay = messagesDisplay[17];
+    await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
     showFlex(buttons10);
 }
 addClickHandle(selectY, selectIClick); addClickHandle(selectZ, selectIClick); addClickHandle(selectAA, selectIClick);
@@ -368,7 +409,8 @@ async function selectJClick(selectedText) {
     displayUserMessage(selectedText);
 
     hideButtons(buttons10);
-    await displaySetMessage('物件の場所はどちらになりますか？');
+    const messageDisplay = messagesDisplay[18];
+    await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
     showGrid(buttonArea);
     scrollToTop(300)
 }
