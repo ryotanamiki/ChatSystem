@@ -46,6 +46,12 @@ async function displayImages() {
         }
     }, 1000);
 }
+
+//スクロールイベント
+function scrollToTop(scrollToTop = 200) {
+    window.scrollBy({ top: scrollToTop, behavior: 'smooth' });
+}
+
 //ディレイ
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -57,6 +63,63 @@ async function delayAll(ms = 1000) {
 document.addEventListener('DOMContentLoaded', async function () {
     const buttonA = document.querySelectorAll('#choiceA');
     const buttonB = document.querySelectorAll('#choiceB');
+    const buttons = document.querySelectorAll('.buttons');
+    const buttons2 = document.querySelectorAll('.buttons2');
+    const buttons3 = document.querySelectorAll('.buttons3');
+    const buttons4 = document.querySelectorAll('.buttons4');
+    const buttons5 = document.querySelectorAll('.buttons5');
+    const buttons6 = document.querySelectorAll('.buttons6');
+    const buttons7 = document.querySelectorAll('.buttons7');
+    const buttons8 = document.querySelectorAll('.buttons8');
+    const buttons9 = document.querySelectorAll('.buttons9');
+    const buttons10 = document.querySelectorAll('.buttons10');
+    const selectA = document.querySelectorAll('#img05');
+    const selectB = document.querySelectorAll('#img06');
+    const selectC = document.querySelectorAll('#imgQ');
+    const selectD = document.querySelectorAll('#img07');
+    const selectE = document.querySelectorAll('#img08');
+    const selectF = document.querySelectorAll('#imgQ2');
+    const selectG = document.querySelectorAll('#img09');
+    const selectH = document.querySelectorAll('#img10');
+    const selectI = document.querySelectorAll('#imgN');
+    const selectJ = document.querySelectorAll('#img11');
+    const selectK = document.querySelectorAll('#img12');
+    const selectL = document.querySelectorAll('#imgN2');
+    const selectM = document.querySelectorAll('#img13');
+    const selectN = document.querySelectorAll('#img14');
+    const selectO = document.querySelectorAll('#imgN3');
+    const selectP = document.querySelectorAll('#img15');
+    const selectQ = document.querySelectorAll('#img16');
+    const selectR = document.querySelectorAll('#imgN4');
+    const selectS = document.querySelectorAll('#img17');
+    const selectT = document.querySelectorAll('#img18');
+    const selectU = document.querySelectorAll('#imgN5');
+    const selectV = document.querySelectorAll('#img19');
+    const selectW = document.querySelectorAll('#img20');
+    const selectX = document.querySelectorAll('#imgN6');
+    const selectY = document.querySelectorAll('#img21');
+    const selectZ = document.querySelectorAll('#img22');
+    const selectAA = document.querySelectorAll('#imgN7');
+    const selectBB = document.querySelectorAll('#img23');
+    const selectCC = document.querySelectorAll('#img24');
+    const selectDD = document.querySelectorAll('#imgN8');
+    const selectT1 = document.querySelectorAll('#t1');
+    const selectT2 = document.querySelectorAll('#t2');
+    const selectT3 = document.querySelectorAll('#t3');
+    const selectT4 = document.querySelectorAll('#t4');
+    const selectT5 = document.querySelectorAll('#t5');
+    const selectT6 = document.querySelectorAll('#t6');
+    const selectT7 = document.querySelectorAll('#t7');
+    const selectT8 = document.querySelectorAll('#t8');
+    const buttonArea = document.querySelectorAll('.button-container2');
+    const selectKen01 = document.querySelectorAll('.selectedKen01');
+    const selectKen02 = document.querySelectorAll('.selectedKen02');
+    const selectKen03 = document.querySelectorAll('.selectedKen03');
+    const selectKen04 = document.querySelectorAll('.selectedKen04');
+    const selectKen05 = document.querySelectorAll('.selectedKen05');
+    const selectKen06 = document.querySelectorAll('.selectedKen06');
+    const selectKen07 = document.querySelectorAll('.selectedKen07');
+    const selectKen08 = document.querySelectorAll('.selectedKen08');
 
     // ボタンを非表示
     function hideButtons(buttons) {
@@ -64,12 +127,25 @@ document.addEventListener('DOMContentLoaded', async function () {
             button.style.display = 'none';
         });
     }
-    // ボタンを表示
+    // ボタンをブロック表示
     function showButtons(buttons) {
         buttons.forEach(button => {
             button.style.display = 'block';
-        });
-    }
+    });
+}
+    //ボタンをフレックス表示
+    function showFlex(buttons) {
+        buttons.forEach(button => {
+            button.style.display = 'flex';
+            scrollToTop();
+    });
+}
+    //ボタンをグリッド表示
+    function showGrid(buttons) {
+        buttons.forEach(button => {
+            button.style.display = 'grid';
+    });
+}
 
     // ローディングメッセージを非表示
     function hideLoadingMessage() {
@@ -147,10 +223,22 @@ async function displaySetMessage(message, icon = true) {
     }
 }
 
-    // 初期非表示のボタンを表示
-    hideButtons(buttonA);
-    hideButtons(buttonB);
+//HTMLからdata-selected-textを持ってくる関数
+    function getSelectedTextFromElement(element) {
+    const buttonElement = element.closest('[data-selected-text]');
+    return buttonElement ? buttonElement.getAttribute('data-selected-text') || '' : '';
+}
 
+//それぞれのクリックハンドラ
+    function addClickHandle(elements, clickHandler) {
+    elements.forEach(element => {
+        element.addEventListener('click', event => {
+            const selectedText = getSelectedTextFromElement(event.target);
+            clickHandler(selectedText);
+        });
+    });
+}
+/*------------------初期メッセージ------------------------- */
     await displaySetMessage('2つの方法で計算することができます。');
     await displaySetMessage('どちらがご希望に近いですか？', false);
 
@@ -158,271 +246,205 @@ async function displaySetMessage(message, icon = true) {
     showButtons(buttonA);
     showButtons(buttonB);
 
-    // ボタンAがクリック
-    buttonA.forEach(button => {
-        button.addEventListener('click', async function () {
-            displayUserMessage('ざっくり計算です');
-            const btn = document.querySelector('.buttonContainer');
-            btn.style.display = 'none';
-            await displaySetMessage('かしこまりました。');
-            await displaySetMessage('データを元に、あなたの相場をざっくり計算します。', false);
-            await displaySetMessage('希望されるお風呂は、どのような形式ですか？');
-            displayButtons([
-                { id: 'img05', image: 'images/img05.png', text: 'ユニットバス' },
-                { id: 'img06', image: 'images/img06.png', text: 'タイル貼り' },
-                { id: 'imgQ', image: 'images/imgQ.png', text: 'わからない' }
-            ]);
-        });
-    });
+/*------------------ボタンA--------------------------- */
+async function buttonAClick(selectedText) {
+    displayUserMessage(selectedText);
 
-    // ボタンBがクリック
-    buttonB.forEach(button => {
-        button.addEventListener('click', async function () {
-            displayUserMessage('しっかり計算です')
-            const btn = document.querySelector('.buttonContainer');
-            btn.style.display = 'none';
-            await displaySetMessage('かしこまりました。');
-            await displaySetMessage('お風呂リフォームの相場は', false);
-            displayImages();
-            await delay(5000)
-            await displaySetMessage('あなたの費用を、データをもとにしっかり計算します。');
-            await displaySetMessage('希望されるお風呂は、どのような形式ですか？', false);
-            displayButtons([
-                { id: 'img05', image: 'images/img05.png', text: 'ユニットバス' },
-                { id: 'img06', image: 'images/img06.png', text: 'タイル貼り' },
-                { id: 'imgQ', image: 'images/imgQ.png', text: 'わからない' }
-            ]);
-        });
-    });
+    hideButtons(buttonA); hideButtons(buttonB);
 
-    //ボタンの中身
-async function displayButtons(buttonData) {
-    await delay(1500);
-    const chatContainer = document.querySelector('.chat-container');
-    const buttonContainer = document.createElement('div');
-    buttonContainer.classList.add('message', 'system-message', 'button-container');
-
-    buttonData.forEach(data => {
-        const button = document.createElement('div');
-        button.classList.add('button2');
-        button.id = data.id;
-
-        const image = new Image();
-        image.src = data.image;
-
-        const text = document.createElement('span');
-        text.textContent = data.text;
-
-        button.append(image, text);
-        buttonContainer.appendChild(button);
-    });
-
-    chatContainer.appendChild(buttonContainer);
-
-        //ボタンクリックイベント
-        buttonContainer.addEventListener('click', async function (event) {
-            const targetButton = event.target.closest('.button2');
-            if (targetButton) {
-                const btnId = targetButton.id;
-                const buttonText = targetButton.querySelector('span').textContent;
-
-                displayUserMessage(buttonText);
-
-                buttonContainer.style.display = 'none';
-                if (btnId === 'img05' || btnId === 'img06' || btnId === 'imgQ') {
-                    await displaySetMessage('希望されるお風呂の大きさは、どのくらいですか？');
-                    displayButtons([
-                        { id: 'img07', image: 'images/img07.png', text: '2畳未満' },
-                        { id: 'img08', image: 'images/img08.png', text: '2畳以上' },
-                        { id: 'imgQ2', image: 'images/imgQ.png', text: 'わからない' }
-                    ]);
-                } else if (btnId === 'img07' || btnId === 'img08' || btnId === 'imgQ2') {
-                    await displaySetMessage('浴槽まわりの希望をお伺いします。');
-                    await displaySetMessage('湯煎に浸かる頻度が多い場合は、浴槽の形が重要です。');
-                    await displaySetMessage('浴槽の形にこだわりはありますか？', false);
-                    displayButtons([
-                        { id: 'img09', image: '', text: '広さ重視' },
-                        { id: 'img10', image: '', text: '節水重視' },
-                        { id: 'imgN', image: '', text: 'とくになし' }
-                    ]);
-                } else if (btnId === 'img09' || btnId === 'img10' || btnId === 'imgN') {
-                    await displaySetMessage('お湯の冷めにくい、保温効果のある浴槽を希望されますか？');
-                    displayButtons([
-                        { id: 'img11', image: '', text: 'はい' },
-                        { id: 'img12', image: '', text: '興味あり' },
-                        { id: 'imgN2', image: '', text: 'いいえ' }
-                    ]);
-                } else if (btnId === 'img11' || btnId === 'img12' || btnId === 'imgN2') {
-                    await displaySetMessage('リラックス・マッサージ効果のある、バブルバス・ジェットバスをご希望されますか？');
-                    displayButtons([
-                        { id: 'img13', image: '', text: 'はい' },
-                        { id: 'img14', image: '', text: '興味あり' },
-                        { id: 'imgN3', image: '', text: 'いいえ' }
-                    ]);
-                } else if (btnId === 'img13' || btnId === 'img14' || btnId === 'imgN3') {
-                    await displaySetMessage('お風呂に埋込み型のオーディオを設置すると、音の広がりがよく、また見た目もスッキリします。');
-                    await displaySetMessage('お風呂にオーディオの設置を希望されますか？', false);
-                    displayButtons([
-                        { id: 'img15', image: '', text: 'はい' },
-                        { id: 'img16', image: '', text: '興味あり' },
-                        { id: 'imgN4', image: '', text: 'いいえ' }
-                    ]);
-                } else if (btnId === 'img15' || btnId === 'img16' || btnId === 'imgN4') {
-                    await displaySetMessage('ゆったりお風呂に浸かりながら、最大24インチの大迫力の画面でテレビを楽しむこともできます。');
-                    await displaySetMessage('お風呂にテレビの設置を希望されますか？', false);
-                    displayButtons([
-                        { id: 'img17', image: '', text: 'はい' },
-                        { id: 'img18', image: '', text: '興味あり' },
-                        { id: 'imgN5', image: '', text: 'いいえ' }
-                    ]);
-                } else if (btnId === 'img17' || btnId === 'img18' || btnId === 'imgN5') {
-                    await displaySetMessage('設置する照明にこだわると、利用シーンに合わせて浴室の雰囲気を手軽にかえることができます');
-                    await displaySetMessage('機能的な照明をご希望されますか？', false);
-                    displayButtons([
-                        { id: 'img19', image: '', text: 'はい' },
-                        { id: 'img20', image: '', text: '興味あり' },
-                        { id: 'imgN6', image: '', text: 'いいえ' }
-                    ]);
-                } else if (btnId === 'img19' || btnId === 'img20' || btnId === 'imgN6') {
-                    await displaySetMessage('湯船に浸かる人が複数いたり、利用時間がバラバラな場合は、追い焚き機能が便利です。');
-                    await displaySetMessage('追い焚き機能をご希望されますか？', false);
-                    displayButtons([
-                        { id: 'img21', image: '', text: 'はい' },
-                        { id: 'img22', image: '', text: '興味あり' },
-                        { id: 'imgN7', image: '', text: 'いいえ' }
-                    ]);
-                } else if (btnId === 'img21' || btnId === 'img22' || btnId === 'imgN7') {
-                    await displaySetMessage('リビングの家族を呼び出したり会話ができるインターフォンの設置を希望しますか？');
-                    displayButtons([
-                        { id: 'img23', image: '', text: 'はい' },
-                        { id: 'img24', image: '', text: '興味あり' },
-                        { id: 'imgN8', image: '', text: 'いいえ' }
-                    ]);
-                } else if (btnId === 'img23' || btnId === 'img24' || btnId === 'imgN8') {
-                    await displaySetMessage('物件の場所はどちらになりますか？');
-                    displayButtons2([
-                        { id: 't1', text: '北海道・東北' },
-                        { id: 't2', text: '関東' },
-                        { id: 't3', text: '北陸・甲信越' },
-                        { id: 't4', text: '東海' },
-                        { id: 't5', text: '関西' },
-                        { id: 't6', text: '中国' },
-                        { id: 't7', text: '四国' },
-                        { id: 't8', text: '九州・沖縄' },
-                    ]);
-                }
-            }
-        });
-    }
-
-    //地方選択後の処理
-async function displayButtons2(buttonData2) {
-        await delay(1000);
-        const chatContainer = document.querySelector('.chat-container');
-        const buttonContainer2 = document.createElement('div');
-        buttonContainer2.classList.add('message', 'system-message', 'button-container2');
-
-        buttonData2.forEach(data => {
-            const button3 = document.createElement('div');
-            button3.classList.add('button3');
-            button3.id = data.id;
-
-            const text = document.createElement('span');
-            text.textContent = data.text;
-            button3.appendChild(text);
-
-            buttonContainer2.appendChild(button3);
-        });
-
-        chatContainer.appendChild(buttonContainer2);
-
-        buttonContainer2.addEventListener('click', async function (event) {
-            const targetBtn = event.target.closest('.button3');
-            const btnId = targetBtn.id;
-
-            if (btnId in buttonTextMapping) {
-                displayButtons2(buttonTextMapping[btnId]);
-            } else {
-                const messageText = getDisplayText(btnId);
-                displayUserMessage(messageText);
-            }
-
-            buttonContainer2.style.display = 'none';
-        });
-
-        const buttonTextMapping = {
-            't1': [
-                { id: 't9', text: '北海道' },
-                { id: 't10', text: '青森県' },
-                { id: 't11', text: '岩手県' },
-                { id: 't12', text: '宮城県' },
-                { id: 't13', text: '秋田県' },
-                { id: 't14', text: '山形県' },
-                { id: 't15', text: '福島県' }
-            ],
-            't2': [
-                { id: 't16', text: '茨城県' },
-                { id: 't17', text: '栃木県' },
-                { id: 't18', text: '群馬県' },
-                { id: 't19', text: '埼玉県' },
-                { id: 't20', text: '千葉県' },
-                { id: 't21', text: '東京都' },
-                { id: 't22', text: '神奈川県' }
-            ],
-            't3': [
-                { id: 't30', text: '富山県' },
-                { id: 't31', text: '石川県' },
-                { id: 't32', text: '福井県' },
-                { id: 't33', text: '山梨県' },
-                { id: 't34', text: '長野県' },
-                { id: 't35', text: '新潟県' }
-            ],
-            't4': [
-                { id: 't36', text: '静岡県' },
-                { id: 't37', text: '愛知県' },
-                { id: 't38', text: '三重県' },
-                { id: 't39', text: '岐阜県' }
-            ],
-            't5': [
-                { id: 't40', text: '大阪府' },
-                { id: 't41', text: '京都府' },
-                { id: 't42', text: '兵庫県' },
-                { id: 't43', text: '奈良県' },
-                { id: 't44', text: '滋賀県' },
-                { id: 't45', text: '和歌山県' }
-            ],
-            't6': [
-                { id: 't46', text: '鳥取県' },
-                { id: 't47', text: '島根県' },
-                { id: 't48', text: '岡山県' },
-                { id: 't49', text: '広島県' },
-                { id: 't50', text: '山口県' }
-            ],
-            't7': [
-                { id: 't51', text: '香川県' },
-                { id: 't52', text: '徳島県' },
-                { id: 't53', text: '高知県' },
-                { id: 't54', text: '愛媛県' }
-            ],
-            't8': [
-                { id: 't55', text: '福岡県' },
-                { id: 't56', text: '佐賀県' },
-                { id: 't57', text: '大分県' },
-                { id: 't58', text: '熊本県' },
-                { id: 't59', text: '宮崎県' },
-                { id: 't60', text: '鹿児島県' },
-                { id: 't61', text: '沖縄県' }
-            ],
-        };
-
-    function getDisplayText(btnId) {
-        for (const key in buttonTextMapping) {
-            const mappings = buttonTextMapping[key];
-            const mapping = mappings.find(mapping => mapping.id === btnId);
-        if (mapping) {
-            return mapping.text;
-        }
-        }
-    }
+    await displaySetMessage('かしこまりました');
+    await displaySetMessage('データを元に、あなたの相場をざっくり計算します。', false);
+    await displaySetMessage('希望されるお風呂は、どのような形式ですか？');
+    await showFlex(buttons);
 }
+addClickHandle(buttonA, buttonAClick);
+/*------------------ボタンB--------------------------- */
+async function buttonBClick(selectedText) {
+    displayUserMessage(selectedText);
+
+    hideButtons(buttonA); hideButtons(buttonB);
+
+    await displaySetMessage('かしこまりました');
+    await displaySetMessage('お風呂リフォームの相場は', false);
+    displayImages();
+    await delay(5000)
+    scrollToTop(500)
+    await displaySetMessage('データを元に、あなたの相場をざっくり計算します。');
+    await displaySetMessage('希望されるお風呂は、どのような形式ですか？', false);
+    await showFlex(buttons);
+}
+addClickHandle(buttonB, buttonBClick);
+/*------------------お風呂の形式-------------------------- */
+async function selectAClick(selectedText) {
+    displayUserMessage(selectedText);
+
+    hideButtons(buttons);
+
+    await displaySetMessage('希望されるお風呂の大きさは、どのくらいですか？');
+    await showFlex(buttons2);
+}
+addClickHandle(selectA, selectAClick); addClickHandle(selectB, selectAClick); addClickHandle(selectC, selectAClick);
+/*------------------お風呂の大きさ------------------------- */
+async function selectBClick(selectedText) {
+    displayUserMessage(selectedText);
+
+    hideButtons(buttons2);
+
+    await displaySetMessage('浴槽まわりの希望をお伺いします。');
+    await displaySetMessage('湯煎に浸かる頻度が多い場合は、浴槽の形が重要です。');
+    await displaySetMessage('浴槽の形にこだわりはありますか？', false);
+    showFlex(buttons3);
+}
+addClickHandle(selectD, selectBClick); addClickHandle(selectE, selectBClick); addClickHandle(selectF, selectBClick);
+/*-------------------浴槽の形-------------------------- */
+async function selectCClick(selectedText) {
+    displayUserMessage(selectedText);
+
+    hideButtons(buttons3);
+    await displaySetMessage('お湯の冷めにくい、保温効果のある浴槽を希望されますか？');
+    showFlex(buttons4);
+}
+addClickHandle(selectG, selectCClick); addClickHandle(selectH, selectCClick); addClickHandle(selectI, selectCClick);
+/*-------------------保温機能-------------------------- */
+async function selectDClick(selectedText) {
+    displayUserMessage(selectedText);
+
+    hideButtons(buttons4);
+    await displaySetMessage('リラックス・マッサージ効果のある、バブルバス・ジェットバスをご希望されますか？');
+    showFlex(buttons5);
+}
+addClickHandle(selectJ, selectDClick); addClickHandle(selectK, selectDClick); addClickHandle(selectL, selectDClick)
+/*-------------------リラックス機能-------------------------- */
+async function selectEClick(selectedText) {
+    displayUserMessage(selectedText);
+
+    hideButtons(buttons5);
+    await displaySetMessage('お風呂に埋込み型のオーディオを設置すると、音の広がりがよく、また見た目もスッキリします。');
+    await displaySetMessage('お風呂にオーディオの設置を希望されますか？', false);
+    showFlex(buttons6);
+}
+addClickHandle(selectM, selectEClick); addClickHandle(selectN, selectEClick); addClickHandle(selectO, selectEClick);
+/*-------------------オーディオ-------------------------- */
+async function selectFClick(selectedText) {
+    displayUserMessage(selectedText);
+
+    hideButtons(buttons6);
+    await displaySetMessage('ゆったりお風呂に浸かりながら、最大24インチの大迫力の画面でテレビを楽しむこともできます。');
+    await displaySetMessage('お風呂にテレビの設置を希望されますか？', false);
+    showFlex(buttons7);
+}
+addClickHandle(selectP, selectFClick); addClickHandle(selectQ, selectFClick); addClickHandle(selectR, selectFClick);
+/*-------------------テレビ-------------------------- */
+async function selectGClick(selectedText) {
+    displayUserMessage(selectedText);
+
+    hideButtons(buttons7);
+    await displaySetMessage('設置する照明にこだわると、利用シーンに合わせて浴室の雰囲気を手軽にかえることができます');
+    await displaySetMessage('機能的な照明をご希望されますか？', false);
+    showFlex(buttons8);
+}
+addClickHandle(selectS, selectGClick); addClickHandle(selectT, selectGClick); addClickHandle(selectU, selectGClick);
+/*-------------------照明-------------------------- */
+async function selectHClick(selectedText) {
+    displayUserMessage(selectedText);
+
+    hideButtons(buttons8);
+    await displaySetMessage('湯船に浸かる人が複数いたり、利用時間がバラバラな場合は、追い焚き機能が便利です。');
+    await displaySetMessage('追い焚き機能をご希望されますか？', false);
+    showFlex(buttons9);
+}
+addClickHandle(selectV, selectHClick); addClickHandle(selectW, selectHClick); addClickHandle(selectX, selectHClick);
+/*-------------------追い焚き機能-------------------------- */
+async function selectIClick(selectedText) {
+    displayUserMessage(selectedText);
+
+    hideButtons(buttons9);
+    await displaySetMessage('リビングの家族を呼び出したり会話ができるインターフォンの設置を希望しますか？');
+    showFlex(buttons10);
+}
+addClickHandle(selectY, selectIClick); addClickHandle(selectZ, selectIClick); addClickHandle(selectAA, selectIClick);
+/*-------------------インターフォン-------------------------- */
+async function selectJClick(selectedText) {
+    displayUserMessage(selectedText);
+
+    hideButtons(buttons10);
+    await displaySetMessage('物件の場所はどちらになりますか？');
+    showGrid(buttonArea);
+    scrollToTop(300)
+}
+addClickHandle(selectBB, selectJClick); addClickHandle(selectCC, selectJClick); addClickHandle(selectDD, selectJClick);
+/*-------------------北海道・東北-------------------------- */
+async function selectKClick() {
+    hideButtons(buttonArea);
+    showGrid(selectKen01);
+}
+async function selectAAClick(selectedText) {
+    displayUserMessage(selectedText);
+    hideButtons(selectKen01);
+}
+/*-------------------関東-------------------------- */
+async function selectLClick() {
+    hideButtons(buttonArea);
+    showGrid(selectKen02);
+}
+async function selectBBClick(selectedText) {
+    displayUserMessage(selectedText);
+    hideButtons(selectKen02);
+}
+/*-------------------北陸・甲信越-------------------------- */
+async function selectMClick() {
+    hideButtons(buttonArea);
+    showGrid(selectKen03);
+}
+async function selectCCClick(selectedText) {
+    displayUserMessage(selectedText);
+    hideButtons(selectKen03);
+}
+/*-------------------東海-------------------------- */
+async function selectNClick() {
+    hideButtons(buttonArea);
+    showGrid(selectKen04);
+}
+async function selectDDClick(selectedText) {
+    displayUserMessage(selectedText);
+    hideButtons(selectKen04);
+}
+/*-------------------関西-------------------------- */
+async function selectOClick() {
+    hideButtons(buttonArea);
+    showGrid(selectKen05);
+}
+async function selectEEClick(selectedText) {
+    displayUserMessage(selectedText);
+    hideButtons(selectKen05);
+}
+/*-------------------中国-------------------------- */
+async function selectPClick() {
+    hideButtons(buttonArea);
+    showGrid(selectKen06);
+}
+async function selectFFClick(selectedText) {
+    displayUserMessage(selectedText);
+    hideButtons(selectKen06);
+}
+/*-------------------四国-------------------------- */
+async function selectQClick() {
+    hideButtons(buttonArea);
+    showGrid(selectKen07);
+}
+async function selectGGClick(selectedText) {
+    displayUserMessage(selectedText);
+    hideButtons(selectKen07);
+}
+/*-------------------九州・沖縄-------------------------- */
+async function selectRClick() {
+    hideButtons(buttonArea);
+    showGrid(selectKen08);
+}
+async function selectHHClick(selectedText) {
+    displayUserMessage(selectedText);
+    hideButtons(selectKen08);
+}
+addClickHandle(selectT1, selectKClick); addClickHandle(selectT2, selectLClick); addClickHandle(selectT3, selectMClick); addClickHandle(selectT4, selectNClick); addClickHandle(selectT5, selectOClick); addClickHandle(selectT6, selectPClick); addClickHandle(selectT7, selectQClick); addClickHandle(selectT8, selectRClick);
+addClickHandle(selectKen01, selectAAClick); addClickHandle(selectKen02, selectBBClick); addClickHandle(selectKen03, selectCCClick); addClickHandle(selectKen04, selectDDClick); addClickHandle(selectKen05, selectEEClick); addClickHandle(selectKen06, selectFFClick); addClickHandle(selectKen07, selectGGClick); addClickHandle(selectKen08, selectHHClick);
 });

@@ -5,7 +5,9 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
 }
-
+.header {
+    height: 100px;
+}
 main {
     width: 100%;
     margin: auto;
@@ -132,6 +134,7 @@ button:hover {
 }
 
 .button1 {
+    display: none;
     padding: 30px 50px;
     font-size: 16px;
     border: 1px solid#999;
@@ -147,7 +150,23 @@ button:hover {
     width: 100%;
     margin: 5% auto;
     gap: 5%;
+}
 
+.buttons,
+.buttons2,
+.buttons3,
+.buttons4,
+.buttons5,
+.buttons6,
+.buttons7,
+.buttons8,
+.buttons9,
+.buttons10 {
+    display: none;
+    flex-direction: row;
+    max-width: 50%;
+    margin: 5% auto;
+    gap: 5%;
 }
 
 .button2 {
@@ -168,25 +187,23 @@ button:hover {
     width: 30%;
 }
 
-#img09,
-#img10,
-#imgN,
-#img11,
-#img12,
-#imgN2 {
-    padding: 15% 0%;
-}
-
-.button-container2 {
-    width: 100%;
-    display: grid;
+.button-container2,
+.selectedKen01,
+.selectedKen02,
+.selectedKen03,
+.selectedKen04,
+.selectedKen05,
+.selectedKen06,
+.selectedKen07,
+.selectedKen08 {
+    max-width: 50%;
+    display: none;
     margin: auto;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     justify-content: center;
     align-items: center;
     margin-top: 5%;
-    /* display: none; */
 }
 
 .button3 {
@@ -203,7 +220,7 @@ button:hover {
 }
 
 footer {
-    height: 100px;
+    height: 800px;
 }
 
 /*-------------------------

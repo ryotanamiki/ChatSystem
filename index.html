@@ -10,30 +10,341 @@
 </head>
 
 <body>
+    <header class="header"></header>
     <main>
-        <div class="chat-container">
-            <div class="message system-message">
-                <div class="load"></div>
-                <div class="bubble"></div>
-            </div>
-            <div class="message user-message">
-                <div class="bubble"></div>
-            </div>
-            </div>
-            <div class=="buttonWrapper">
-                <div class="buttonContainer">
-                    <button class="button1" id="choiceA">
-                        <p>ざっくり計算</p>広さや形状から<br>おおまかに
-                    </button>
-                    <button class="button1" id="choiceB">
-                        <p>しっかり計算</p>欲しい機能や<br>設備も入れて
-                    </button>
+        <div class="chat-container"></div>
+        <div class=="buttonWrapper">
+            <div class="buttonContainer">
+                <button class="button1" id="choiceA" data-selected-text="ざっくり計算です">
+                    <p>ざっくり計算</p>広さや形状から<br>おおまかに
+                </button>
+                <button class="button1" id="choiceB" data-selected-text="しっかり計算です">
+                    <p>しっかり計算</p>欲しい機能や<br>設備も入れて
+                </button>
                 </div>
+                </div>
+        <div class="btn">
+            <div class="buttons">
+                <button class="button2" id="img05" data-selected-text="ユニットバスです">
+                    <img class="img01" src="images/img05.png" alt="">
+                    <p>ユニットバスです</p>
+                </button>
+                <button class="button2" id="img06" data-selected-text="タイル貼りです">
+                    <img class="img02" src="images/img06.png" alt="">
+                    <p>タイル貼りです</p>
+                </button>
+                <button class="button2" id="imgQ" data-selected-text="わからない">
+                    <img class="img03" src="images/imgQ.png" alt="">
+                    <p>わからない</p>
+                </button>
             </div>
+        </div>
+        <div class="btn">
+            <div class="buttons2">
+                <button class="button2" id="img07" data-selected-text="２畳未満です">
+                    <img class="img01" src="images/img07.png" alt="">
+                    <p>２畳未満です</p>
+                </button>
+                <button class="button2" id="img08" data-selected-text="２畳以上です">
+                    <img class="img02" src="images/img08.png" alt="">
+                    <p>2畳以上です</p>
+                </button>
+                <button class="button2" id="imgQ2" data-selected-text="わからない">
+                    <img class="img03" src="images/imgQ.png" alt="">
+                    <p>わからない</p>
+                </button>
+            </div>
+        </div>
+        <div class="btn">
+            <div class="buttons3">
+                <button class="button2" id="img09" data-selected-text="広さ重視です">
+                    <p>広さ重視</p>
+                </button>
+                <button class="button2" id="img10" data-selected-text="節水重視です">
+                    <p>節水重視</p>
+                </button>
+                <button class="button2" id="imgN" data-selected-text="とくになし">
+                    <p>とくになし</p>
+                </button>
+            </div>
+        </div>
+        <div class="btn">
+            <div class="buttons4">
+                <button class="button2" id="img11" data-selected-text="はい">
+                    <p>はい</p>
+                </button>
+                <button class="button2" id="img12" data-selected-text="興味あり">
+                    <p>興味あり</p>
+                </button>
+                <button class="button2" id="imgN2" data-selected-text="いいえ">
+                    <p>いいえ</p>
+                </button>
+            </div>
+        </div>
+        <div class="btn">
+            <div class="buttons5">
+                <button class="button2" id="img13" data-selected-text="はい">
+                    <p>はい</p>
+                </button>
+                <button class="button2" id="img14" data-selected-text="興味あり">
+                    <p>興味あり</p>
+                </button>
+                <button class="button2" id="imgN3" data-selected-text="いいえ">
+                    <p>いいえ</p>
+                </button>
+            </div>
+        </div>
+        <div class="btn">
+            <div class="buttons6">
+                <button class="button2" id="img15" data-selected-text="はい">
+                    <p>はい</p>
+                </button>
+                <button class="button2" id="img16" data-selected-text="興味あり">
+                    <p>興味あり</p>
+                </button>
+                <button class="button2" id="imgN4" data-selected-text="いいえ">
+                    <p>いいえ</p>
+                </button>
+            </div>
+        </div>
+        <div class="btn">
+            <div class="buttons7">
+                <button class="button2" id="img17" data-selected-text="はい">
+                    <p>はい</p>
+                </button>
+                <button class="button2" id="img18" data-selected-text="興味あり">
+                    <p>興味あり</p>
+                </button>
+                <button class="button2" id="imgN5" data-selected-text="いいえ">
+                    <p>いいえ</p>
+                </button>
+            </div>
+        </div>
+        <div class="btn">
+            <div class="buttons8">
+                <button class="button2" id="img19" data-selected-text="はい">
+                    <p>はい</p>
+                </button>
+                <button class="button2" id="img20" data-selected-text="興味あり">
+                    <p>興味あり</p>
+                </button>
+                <button class="button2" id="imgN6" data-selected-text="いいえ">
+                    <p>いいえ</p>
+                </button>
+            </div>
+        </div>
+        <div class="btn">
+            <div class="buttons9">
+                <button class="button2" id="img21" data-selected-text="はい">
+                    <p>はい</p>
+                </button>
+                <button class="button2" id="img22" data-selected-text="興味あり">
+                    <p>興味あり</p>
+                </button>
+                <button class="button2" id="imgN7" data-selected-text="いいえ">
+                    <p>いいえ</p>
+                </button>
+            </div>
+        </div>
+        <div class="btn">
+            <div class="buttons10">
+                <button class="button2" id="img23" data-selected-text="はい">
+                    <p>はい</p>
+                </button>
+                <button class="button2" id="img24" data-selected-text="興味あり">
+                    <p>興味あり</p>
+                </button>
+                <button class="button2" id="imgN8" data-selected-text="いいえ">
+                    <p>いいえ</p>
+                </button>
+            </div>
+        </div>
+        <div class="btn">
+            <div class="button-container2">
+                <button class="button3" id="t1">
+                    <p>北海道・東北</p>
+                </button>
+                <button class="button3" id="t2">
+                    <p>関東</p>
+                </button>
+                <button class="button3" id="t3">
+                    <p>北陸・甲信越</p>
+                </button>
+                <button class="button3" id="t4">
+                    <p>東海</p>
+                </button>
+                <button class="button3" id="t5">
+                    <p>関西</p>
+                </button>
+                <button class="button3" id="t6">
+                    <p>中国</p>
+                </button>
+                <button class="button3" id="t7">
+                    <p>四国</p>
+                </button>
+                <button class="button3" id="t8">
+                    <p>九州・沖縄</p>
+                </button>
+            </div>
+        </div>
+        <div class="selectedKen01">
+            <button class="button3" id="t9" data-selected-text="北海道です">
+                <p>北海道</p>
+            </button>
+            <button class="button3" id="t10" data-selected-text="青森県です">
+                <p>青森県</p>
+            </button>
+            <button class="button3" id="t11" data-selected-text="岩手県です">
+                <p>岩手県</p>
+            </button>
+            <button class="button3" id="t12" data-selected-text="宮城県です">
+                <p>宮城県</p>
+            </button>
+            <button class="button3" id="t13" data-selected-text="秋田県です">
+                <p>秋田県</p>
+            </button>
+            <button class="button3" id="t14" data-selected-text="山形県です">
+                <p>山形県</p>
+            </button>
+            <button class="button3" id="t15" data-selected-text="福島県です">
+                <p>福島県</p>
+            </button>
+        </div>
+        <div class="selectedKen02">
+            <button class="button3" id="16" data-selected-text="茨城県です">
+                <p>茨城県</p>
+            </button>
+            <button class="button3" id="t17" data-selected-text="栃木県です">
+                <p>栃木県</p>
+            </button>
+            <button class="button3" id="t18" data-selected-text="群馬県です">
+                <p>群馬県</p>
+            </button>
+            <button class="button3" id="t19" data-selected-text="埼玉県です">
+                <p>埼玉県</p>
+            </button>
+            <button class="button3" id="t20" data-selected-text="千葉県です">
+                <p>千葉県</p>
+            </button>
+            <button class="button3" id="t21" data-selected-text="東京都です">
+                <p>東京都</p>
+            </button>
+            <button class="button3" id="t22" data-selected-text="神奈川県です">
+                <p>神奈川県</p>
+            </button>
+        </div>
+        <div class="selectedKen03">
+            <button class="button3" id="t23" data-selected-text="富山県です">
+                <p>富山県</p>
+            </button>
+            <button class="button3" id="t24" data-selected-text="石川県です">
+                <p>石川県</p>
+            </button>
+            <button class="button3" id="t25" data-selected-text="福井県です">
+                <p>福井県</p>
+            </button>
+            <button class="button3" id="t26" data-selected-text="山梨県です">
+                <p>山梨県</p>
+            </button>
+            <button class="button3" id="t27" data-selected-text="長野県です">
+                <p>長野県</p>
+            </button>
+            <button class="button3" id="t28" data-selected-text="新潟県です">
+                <p>新潟県</p>
+            </button>
+        </div>
+        <div class="selectedKen04">
+            <button class="button3" id="t29" data-selected-text="静岡県です">
+                <p>静岡県</p>
+            </button>
+            <button class="button3" id="t30" data-selected-text="愛知県です">
+                <p>愛知県</p>
+            </button>
+            <button class="button3" id="t31" data-selected-text="三重県です">
+                <p>三重県</p>
+            </button>
+            <button class="button3" id="t32" data-selected-text="岐阜県です">
+                <p>岐阜県</p>
+            </button>
+        </div>
+        <div class="selectedKen05">
+            <button class="button3" id="t33" data-selected-text="大阪府です">
+                <p>大阪府</p>
+            </button>
+            <button class="button3" id="t34" data-selected-text="京都府です">
+                <p>京都府</p>
+            </button>
+            <button class="button3" id="t35" data-selected-text="兵庫県です">
+                <p>兵庫県</p>
+            </button>
+            <button class="button3" id="t36" data-selected-text="奈良県です">
+                <p>奈良県</p>
+            </button>
+            <button class="button3" id="t37" data-selected-text="滋賀県です">
+                <p>滋賀県</p>
+            </button>
+            <button class="button3" id="t38" data-selected-text="和歌山県です">
+                <p>和歌山県</p>
+            </button>
+        </div>
+        <div class="selectedKen06">
+            <button class="button3" id="t39" data-selected-text="鳥取県です">
+                <p>鳥取県</p>
+            </button>
+            <button class="button3" id="t40" data-selected-text="島根県です">
+                <p>島根県</p>
+            </button>
+            <button class="button3" id="t41" data-selected-text="岡山県です">
+                <p>岡山県</p>
+            </button>
+            <button class="button3" id="t42" data-selected-text="広島家です">
+                <p>広島県</p>
+            </button>
+            <button class="button3" id="t43" data-selected-text="山口県です">
+                <p>山口県</p>
+            </button>
+        </div>
+        <div class="selectedKen07">
+            <button class="button3" id="t44" data-selected-text="香川県です">
+                <p>香川県</p>
+            </button>
+            <button class="button3" id="t45" data-selected-text="徳島県です">
+                <p>徳島県</p>
+            </button>
+            <button class="button3" id="t46" data-selected-text="高知県です">
+                <p>高知県</p>
+            </button>
+            <button class="button3" id="t47" data-selected-text="愛媛県です">
+                <p>愛媛県</p>
+            </button>
+        </div>
+        <div class="selectedKen08">
+            <button class="button3" id="t48" data-selected-text="福岡県です">
+                <p>福岡県</p>
+            </button>
+            <button class="button3" id="t49" data-selected-text="佐賀県です">
+                <p>佐賀県</p>
+            </button>
+            <button class="button3" id="t50" data-selected-text="大分県です">
+                <p>大分県</p>
+            </button>
+            <button class="button3" id="t51" data-selected-text="熊本県です">
+                <p>熊本県</p>
+            </button>
+            <button class="button3" id="t52" data-selected-text="宮崎県です">
+                <p>宮崎県</p>
+            </button>
+            <button class="button3" id="t53" data-selected-text="鹿児島県です">
+                <p>鹿児島県</p>
+            </button>
+            <button class="button3" id="t54" data-selected-text="沖縄県です">
+                <p>沖縄県</p>
+            </button>
+        </div>
     </main>
     <footer>
     </footer>
     <script src="main.js"></script>
-    </body>
+</body>
 
 </html>
