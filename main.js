@@ -238,31 +238,68 @@ async function displaySetMessage(message, icon = true) {
         });
     });
     }
-//システムメッセージの配列
-    const messagesDisplay = [
+//順番に表示する関数
+    async function displayMessagesShow(messages) {
+    for (const messageDisplay of messages) {
+        await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
+    }
+}
+    //システムメッセージの配列
+    const messagesDisplayA = [
+        { message: '2つの方法で計算することができます。', useIcon: true },
+        { message: 'どちらがご希望に近いですか？', useIcon: false }
+    ];
+    const messagesDisplayB = [
         { message: 'かしこまりました。', useIcon: true },
         { message: 'データを元に、あなたの相場をざっくり計算します。', useIcon: false },
-        { message: '希望されるお風呂は、どのような形式ですか？', useIcon: true },
-        { message: '希望されるお風呂の大きさは、どのくらいですか？。', useIcon: true },
+        { message: '希望されるお風呂は、どのような形式ですか？', useIcon: true }
+    ];
+    const messagesDisplayC = [
+        { message: 'かしこまりました', useIcon: true },
+        { message: 'お風呂リフォームの相場は', useIcon: false }
+    ];
+    const messagesDisplayD = [
+        { message: 'データを元に、あなたの相場をしっかり計算します。', useIcon: true },
+        { message: '希望されるお風呂は、どのような形式ですか？', useIcon: false }
+    ];
+    const messagesDisplayE = [
+        { message: '希望されるお風呂の大きさは、どのくらいですか？。', useIcon: true }
+    ];
+    const messagesDisplayF = [
         { message: '浴槽まわりの希望をお伺いします。', useIcon: true },
         { message: '湯煎に浸かる頻度が多い場合は、浴槽の形が重要です。', useIcon: true },
-        { message: '浴槽の形にこだわりはありますか？', useIcon: false },
-        { message: 'お湯の冷めにくい、保温効果のある浴槽を希望されますか？', useIcon: true },
-        { message: 'リラックス・マッサージ効果のある、バブルバス・ジェットバスをご希望されますか？', useIcon: true },
+        { message: '浴槽の形にこだわりはありますか？', useIcon: false }
+    ];
+    const messagesDisplayG = [
+        { message: 'お湯の冷めにくい、保温効果のある浴槽を希望されますか？', useIcon: true }
+    ];
+    const messagesDisplayH = [
+        { message: 'リラックス・マッサージ効果のある、バブルバス・ジェットバスをご希望されますか？', useIcon: true }
+    ];
+    const messagesDisplayI = [
         { message: 'お風呂に埋込み型のオーディオを設置すると、音の広がりがよく、また見た目もスッキリします。', useIcon: true },
-        { message: 'お風呂にオーディオの設置を希望されますか？', useIcon: false },
+        { message: 'お風呂にオーディオの設置を希望されますか？', useIcon: false }
+    ];
+    const messagesDisplayJ = [
         { message: 'ゆったりお風呂に浸かりながら、最大24インチの大迫力の画面でテレビを楽しむこともできます。', useIcon: true },
         { message: 'お風呂にテレビの設置を希望されますか？', useIcon: false },
+    ];
+    const messagesDisplayK = [
         { message: '設置する照明にこだわると、利用シーンに合わせて浴室の雰囲気を手軽にかえることができます', useIcon: true },
-        { message: '機能的な照明をご希望されますか？', useIcon: false },
+        { message: '機能的な照明をご希望されますか？', useIcon: false }
+    ];
+    const messagesDisplayL = [
         { message: '湯船に浸かる人が複数いたり、利用時間がバラバラな場合は、追い焚き機能が便利です。', useIcon: true },
-        { message: '追い焚き機能をご希望されますか？', useIcon: false },
-        { message: 'リビングの家族を呼び出したり会話ができるインターフォンの設置を希望しますか？', useIcon: true },
-        { message: '物件の場所はどちらになりますか？', useIcon: true },
+        { message: '追い焚き機能をご希望されますか？', useIcon: false }
+    ];
+    const messagesDisplayM = [
+        { message: 'リビングの家族を呼び出したり会話ができるインターフォンの設置を希望しますか？', useIcon: true }
+    ];
+    const messagesDisplayN = [
+        { message: '物件の場所はどちらになりますか？', useIcon: true }
     ];
 /*------------------初期メッセージ------------------------- */
-    await displaySetMessage('2つの方法で計算することができます。');
-    await displaySetMessage('どちらがご希望に近いですか？', false);
+    await displayMessagesInSeq(messagesDisplayA);
 
     await delay(1000);
     showButtons(buttonA);
@@ -273,11 +310,7 @@ async function buttonAClick(selectedText) {
     displayUserMessage(selectedText);
 
     hideButtons(buttonA); hideButtons(buttonB);
-    const indicesToDisplay = [0, 1, 2];
-    for (const index of indicesToDisplay) {
-        const messageDisplay = messagesDisplay[index];
-        await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
-    }
+    await displayMessagesShow(messagesDisplayB);
     await showFlex(buttons);
 }
 addClickHandle(buttonA, buttonAClick);
@@ -287,13 +320,11 @@ async function buttonBClick(selectedText) {
 
     hideButtons(buttonA); hideButtons(buttonB);
 
-    await displaySetMessage('かしこまりました');
-    await displaySetMessage('お風呂リフォームの相場は', false);
+    await displayMessagesShow(messagesDisplayC);
     displayImages();
     await delay(5000)
     scrollToTop(500)
-    await displaySetMessage('データを元に、あなたの相場をざっくり計算します。');
-    await displaySetMessage('希望されるお風呂は、どのような形式ですか？', false);
+    await displayMessagesShow(messagesDisplayD);
     await showFlex(buttons);
 }
 addClickHandle(buttonB, buttonBClick);
@@ -303,8 +334,7 @@ async function selectAClick(selectedText) {
 
     hideButtons(buttons);
 
-    const messageDisplay = messagesDisplay[3];
-    await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
+    await displayMessagesShow(messagesDisplayE);
     showFlex(buttons2);
 }
 addClickHandle(selectA, selectAClick); addClickHandle(selectB, selectAClick); addClickHandle(selectC, selectAClick);
@@ -314,11 +344,7 @@ async function selectBClick(selectedText) {
 
     hideButtons(buttons2);
 
-    const indicesToDisplay = [4, 5, 6];
-    for (const index of indicesToDisplay) {
-        const messageDisplay = messagesDisplay[index];
-        await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
-    }
+    await displayMessagesShow(messagesDisplayF);
     showFlex(buttons3);
 }
 addClickHandle(selectD, selectBClick); addClickHandle(selectE, selectBClick); addClickHandle(selectF, selectBClick);
@@ -327,8 +353,7 @@ async function selectCClick(selectedText) {
     displayUserMessage(selectedText);
 
     hideButtons(buttons3);
-    const messageDisplay = messagesDisplay[7];
-    await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
+    await displayMessagesShow(messagesDisplayG);
     showFlex(buttons4);
 }
 addClickHandle(selectG, selectCClick); addClickHandle(selectH, selectCClick); addClickHandle(selectI, selectCClick);
@@ -337,8 +362,7 @@ async function selectDClick(selectedText) {
     displayUserMessage(selectedText);
 
     hideButtons(buttons4);
-    const messageDisplay = messagesDisplay[8];
-    await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
+    await displayMessagesShow(messagesDisplayH);
     showFlex(buttons5);
 }
 addClickHandle(selectJ, selectDClick); addClickHandle(selectK, selectDClick); addClickHandle(selectL, selectDClick)
@@ -347,11 +371,7 @@ async function selectEClick(selectedText) {
     displayUserMessage(selectedText);
 
     hideButtons(buttons5);
-    const indicesToDisplay = [9, 10];
-    for (const index of indicesToDisplay) {
-        const messageDisplay = messagesDisplay[index];
-        await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
-    }
+    await displayMessagesShow(messagesDisplayI);
     showFlex(buttons6);
 }
 addClickHandle(selectM, selectEClick); addClickHandle(selectN, selectEClick); addClickHandle(selectO, selectEClick);
@@ -360,11 +380,7 @@ async function selectFClick(selectedText) {
     displayUserMessage(selectedText);
 
     hideButtons(buttons6);
-    const indicesToDisplay = [11, 12];
-    for (const index of indicesToDisplay) {
-        const messageDisplay = messagesDisplay[index];
-        await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
-    }
+    await displayMessagesShow(messagesDisplayJ);
     showFlex(buttons7);
 }
 addClickHandle(selectP, selectFClick); addClickHandle(selectQ, selectFClick); addClickHandle(selectR, selectFClick);
@@ -373,11 +389,7 @@ async function selectGClick(selectedText) {
     displayUserMessage(selectedText);
 
     hideButtons(buttons7);
-    const indicesToDisplay = [13, 14];
-    for (const index of indicesToDisplay) {
-        const messageDisplay = messagesDisplay[index];
-        await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
-    }
+    await displayMessagesShow(messagesDisplayK);
     showFlex(buttons8);
 }
 addClickHandle(selectS, selectGClick); addClickHandle(selectT, selectGClick); addClickHandle(selectU, selectGClick);
@@ -386,11 +398,7 @@ async function selectHClick(selectedText) {
     displayUserMessage(selectedText);
 
     hideButtons(buttons8);
-    const indicesToDisplay = [15, 16];
-    for (const index of indicesToDisplay) {
-        const messageDisplay = messagesDisplay[index];
-        await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
-    }
+    await displayMessagesShow(messagesDisplayL);
     showFlex(buttons9);
 }
 addClickHandle(selectV, selectHClick); addClickHandle(selectW, selectHClick); addClickHandle(selectX, selectHClick);
@@ -399,8 +407,7 @@ async function selectIClick(selectedText) {
     displayUserMessage(selectedText);
 
     hideButtons(buttons9);
-    const messageDisplay = messagesDisplay[17];
-    await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
+    await displayMessagesShow(messagesDisplayM);
     showFlex(buttons10);
 }
 addClickHandle(selectY, selectIClick); addClickHandle(selectZ, selectIClick); addClickHandle(selectAA, selectIClick);
@@ -409,8 +416,7 @@ async function selectJClick(selectedText) {
     displayUserMessage(selectedText);
 
     hideButtons(buttons10);
-    const messageDisplay = messagesDisplay[18];
-    await displaySetMessage(messageDisplay.message, messageDisplay.useIcon);
+    await displayMessagesShow(messagesDisplayN);
     showGrid(buttonArea);
     scrollToTop(300)
 }
