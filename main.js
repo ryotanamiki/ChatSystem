@@ -61,65 +61,70 @@ async function delayAll(ms = 1000) {
 }
 //メイン
 document.addEventListener('DOMContentLoaded', async function () {
-    const buttonA = document.querySelectorAll('#choiceA');
-    const buttonB = document.querySelectorAll('#choiceB');
-    const buttons = document.querySelectorAll('.buttons');
-    const buttons2 = document.querySelectorAll('.buttons2');
-    const buttons3 = document.querySelectorAll('.buttons3');
-    const buttons4 = document.querySelectorAll('.buttons4');
-    const buttons5 = document.querySelectorAll('.buttons5');
-    const buttons6 = document.querySelectorAll('.buttons6');
-    const buttons7 = document.querySelectorAll('.buttons7');
-    const buttons8 = document.querySelectorAll('.buttons8');
-    const buttons9 = document.querySelectorAll('.buttons9');
-    const buttons10 = document.querySelectorAll('.buttons10');
-    const selectA = document.querySelectorAll('#img05');
-    const selectB = document.querySelectorAll('#img06');
-    const selectC = document.querySelectorAll('#imgQ');
-    const selectD = document.querySelectorAll('#img07');
-    const selectE = document.querySelectorAll('#img08');
-    const selectF = document.querySelectorAll('#imgQ2');
-    const selectG = document.querySelectorAll('#img09');
-    const selectH = document.querySelectorAll('#img10');
-    const selectI = document.querySelectorAll('#imgN');
-    const selectJ = document.querySelectorAll('#img11');
-    const selectK = document.querySelectorAll('#img12');
-    const selectL = document.querySelectorAll('#imgN2');
-    const selectM = document.querySelectorAll('#img13');
-    const selectN = document.querySelectorAll('#img14');
-    const selectO = document.querySelectorAll('#imgN3');
-    const selectP = document.querySelectorAll('#img15');
-    const selectQ = document.querySelectorAll('#img16');
-    const selectR = document.querySelectorAll('#imgN4');
-    const selectS = document.querySelectorAll('#img17');
-    const selectT = document.querySelectorAll('#img18');
-    const selectU = document.querySelectorAll('#imgN5');
-    const selectV = document.querySelectorAll('#img19');
-    const selectW = document.querySelectorAll('#img20');
-    const selectX = document.querySelectorAll('#imgN6');
-    const selectY = document.querySelectorAll('#img21');
-    const selectZ = document.querySelectorAll('#img22');
-    const selectAA = document.querySelectorAll('#imgN7');
-    const selectBB = document.querySelectorAll('#img23');
-    const selectCC = document.querySelectorAll('#img24');
-    const selectDD = document.querySelectorAll('#imgN8');
-    const selectT1 = document.querySelectorAll('#t1');
-    const selectT2 = document.querySelectorAll('#t2');
-    const selectT3 = document.querySelectorAll('#t3');
-    const selectT4 = document.querySelectorAll('#t4');
-    const selectT5 = document.querySelectorAll('#t5');
-    const selectT6 = document.querySelectorAll('#t6');
-    const selectT7 = document.querySelectorAll('#t7');
-    const selectT8 = document.querySelectorAll('#t8');
-    const buttonArea = document.querySelectorAll('.button-container2');
-    const selectKen01 = document.querySelectorAll('.selectedKen01');
-    const selectKen02 = document.querySelectorAll('.selectedKen02');
-    const selectKen03 = document.querySelectorAll('.selectedKen03');
-    const selectKen04 = document.querySelectorAll('.selectedKen04');
-    const selectKen05 = document.querySelectorAll('.selectedKen05');
-    const selectKen06 = document.querySelectorAll('.selectedKen06');
-    const selectKen07 = document.querySelectorAll('.selectedKen07');
-    const selectKen08 = document.querySelectorAll('.selectedKen08');
+    const buttons = [
+        document.querySelectorAll('.button1'),
+        document.querySelectorAll('#choiceA'),
+        document.querySelectorAll('#choiceB'),
+        document.querySelectorAll('.buttons'),
+        document.querySelectorAll('.buttons2'),
+        document.querySelectorAll('.buttons3'),
+        document.querySelectorAll('.buttons4'),
+        document.querySelectorAll('.buttons5'),
+        document.querySelectorAll('.buttons6'),
+        document.querySelectorAll('.buttons7'),
+        document.querySelectorAll('.buttons8'),
+        document.querySelectorAll('.buttons9'),
+        document.querySelectorAll('.buttons10')
+    ];
+    const select = [
+        document.querySelectorAll('#img05'),
+        document.querySelectorAll('#img06'),
+        document.querySelectorAll('#imgQ'),
+        document.querySelectorAll('#img07'),
+        document.querySelectorAll('#img08'),
+        document.querySelectorAll('#imgQ2'),
+        document.querySelectorAll('#img09'),
+        document.querySelectorAll('#img10'),
+        document.querySelectorAll('#imgN'),
+        document.querySelectorAll('#img11'),
+        document.querySelectorAll('#img12'),
+        document.querySelectorAll('#imgN2'),
+        document.querySelectorAll('#img13'),
+        document.querySelectorAll('#img14'),
+        document.querySelectorAll('#imgN3'),
+        document.querySelectorAll('#img15'),
+        document.querySelectorAll('#img16'),
+        document.querySelectorAll('#imgN4'),
+        document.querySelectorAll('#img17'),
+        document.querySelectorAll('#img18'),
+        document.querySelectorAll('#imgN5'),
+        document.querySelectorAll('#img19'),
+        document.querySelectorAll('#img20'),
+        document.querySelectorAll('#imgN6'),
+        document.querySelectorAll('#img21'),
+        document.querySelectorAll('#img22'),
+        document.querySelectorAll('#imgN7'),
+        document.querySelectorAll('#img23'),
+        document.querySelectorAll('#img24'),
+        document.querySelectorAll('#imgN8'),
+        document.querySelectorAll('.button-container2'),
+        document.querySelectorAll('.selectedKen01'),
+        document.querySelectorAll('.selectedKen02'),
+        document.querySelectorAll('.selectedKen03'),
+        document.querySelectorAll('.selectedKen04'),
+        document.querySelectorAll('.selectedKen05'),
+        document.querySelectorAll('.selectedKen06'),
+        document.querySelectorAll('.selectedKen07'),
+        document.querySelectorAll('.selectedKen08'),
+        document.querySelectorAll('#t1'),
+        document.querySelectorAll('#t2'),
+        document.querySelectorAll('#t3'),
+        document.querySelectorAll('#t4'),
+        document.querySelectorAll('#t5'),
+        document.querySelectorAll('#t6'),
+        document.querySelectorAll('#t7'),
+        document.querySelectorAll('#t8')
+    ];
 
     // ボタンを非表示
     function hideButtons(buttons) {
@@ -222,6 +227,33 @@ async function displaySetMessage(message, icon = true) {
         }
     }
 }
+//共通
+async function handleSelectClick(selectedText, messagesToDisplay, nextButtons, thirdButtons) {
+    displayUserMessage(selectedText);
+    hideButtons(nextButtons);
+
+    const messagesArray = Array.isArray(messagesToDisplay) ? messagesToDisplay : [messagesToDisplay];
+
+    await displayMessagesShow(messagesArray);
+    showFlex(thirdButtons);
+}
+async function handleSelectClick2(selectedText, messagesToDisplay, nextButtons, thirdButtons) {
+    displayUserMessage(selectedText);
+    hideButtons(nextButtons);
+
+    const messagesArray = Array.isArray(messagesToDisplay) ? messagesToDisplay : [messagesToDisplay];
+
+    await displayMessagesShow(messagesArray);
+    showGrid(thirdButtons);
+}
+async function handleSelectClick3(nextButtons, thirdButtons) {
+    hideButtons(nextButtons);
+    showGrid(thirdButtons);
+}
+async function handleSelectClick4(selectedText, nextButtons) {
+    displayUserMessage(selectedText);
+    hideButtons(nextButtons);
+}
 
 //HTMLからdata-selected-textを持ってくる関数
     function getSelectedTextFromElement(element) {
@@ -245,254 +277,190 @@ async function displaySetMessage(message, icon = true) {
     }
 }
     //システムメッセージの配列
-    const messagesDisplayA = [
+    const messagesDisplay = [
+    [
         { message: '2つの方法で計算することができます。', useIcon: true },
         { message: 'どちらがご希望に近いですか？', useIcon: false }
-    ];
-    const messagesDisplayB = [
+    ],
+    [
         { message: 'かしこまりました。', useIcon: true },
         { message: 'データを元に、あなたの相場をざっくり計算します。', useIcon: false },
         { message: '希望されるお風呂は、どのような形式ですか？', useIcon: true }
-    ];
-    const messagesDisplayC = [
+    ],
+    [
         { message: 'かしこまりました', useIcon: true },
         { message: 'お風呂リフォームの相場は', useIcon: false }
-    ];
-    const messagesDisplayD = [
+    ],
+    [
         { message: 'データを元に、あなたの相場をしっかり計算します。', useIcon: true },
         { message: '希望されるお風呂は、どのような形式ですか？', useIcon: false }
-    ];
-    const messagesDisplayE = [
+    ],
+    [
         { message: '希望されるお風呂の大きさは、どのくらいですか？。', useIcon: true }
-    ];
-    const messagesDisplayF = [
+    ],
+    [
         { message: '浴槽まわりの希望をお伺いします。', useIcon: true },
         { message: '湯煎に浸かる頻度が多い場合は、浴槽の形が重要です。', useIcon: true },
         { message: '浴槽の形にこだわりはありますか？', useIcon: false }
-    ];
-    const messagesDisplayG = [
+    ],
+    [
         { message: 'お湯の冷めにくい、保温効果のある浴槽を希望されますか？', useIcon: true }
-    ];
-    const messagesDisplayH = [
+    ],
+    [
         { message: 'リラックス・マッサージ効果のある、バブルバス・ジェットバスをご希望されますか？', useIcon: true }
-    ];
-    const messagesDisplayI = [
+    ],
+    [
         { message: 'お風呂に埋込み型のオーディオを設置すると、音の広がりがよく、また見た目もスッキリします。', useIcon: true },
         { message: 'お風呂にオーディオの設置を希望されますか？', useIcon: false }
-    ];
-    const messagesDisplayJ = [
+    ],
+    [
         { message: 'ゆったりお風呂に浸かりながら、最大24インチの大迫力の画面でテレビを楽しむこともできます。', useIcon: true },
-        { message: 'お風呂にテレビの設置を希望されますか？', useIcon: false },
-    ];
-    const messagesDisplayK = [
+        { message: 'お風呂にテレビの設置を希望されますか？', useIcon: false }
+    ],
+    [
         { message: '設置する照明にこだわると、利用シーンに合わせて浴室の雰囲気を手軽にかえることができます', useIcon: true },
         { message: '機能的な照明をご希望されますか？', useIcon: false }
-    ];
-    const messagesDisplayL = [
+    ],
+    [
         { message: '湯船に浸かる人が複数いたり、利用時間がバラバラな場合は、追い焚き機能が便利です。', useIcon: true },
         { message: '追い焚き機能をご希望されますか？', useIcon: false }
-    ];
-    const messagesDisplayM = [
+    ],
+    [
         { message: 'リビングの家族を呼び出したり会話ができるインターフォンの設置を希望しますか？', useIcon: true }
-    ];
-    const messagesDisplayN = [
+    ],
+    [
         { message: '物件の場所はどちらになりますか？', useIcon: true }
+    ]
     ];
 /*------------------初期メッセージ------------------------- */
-    await displayMessagesInSeq(messagesDisplayA);
-
-    await delay(1000);
-    showButtons(buttonA);
-    showButtons(buttonB);
-
+    await displayMessagesShow(messagesDisplay[0]);
+    await showButtons(buttons[0]);
 /*------------------ボタンA--------------------------- */
 async function buttonAClick(selectedText) {
-    displayUserMessage(selectedText);
-
-    hideButtons(buttonA); hideButtons(buttonB);
-    await displayMessagesShow(messagesDisplayB);
-    await showFlex(buttons);
+    handleSelectClick(selectedText, messagesDisplay[1], buttons[0], buttons[3]);
 }
-addClickHandle(buttonA, buttonAClick);
+addClickHandle(buttons[1], buttonAClick);
 /*------------------ボタンB--------------------------- */
 async function buttonBClick(selectedText) {
     displayUserMessage(selectedText);
 
-    hideButtons(buttonA); hideButtons(buttonB);
+    hideButtons(buttons[0])
 
-    await displayMessagesShow(messagesDisplayC);
+    await displayMessagesShow(messagesDisplay[2]);
     displayImages();
     await delay(5000)
     scrollToTop(500)
-    await displayMessagesShow(messagesDisplayD);
-    await showFlex(buttons);
+    await displayMessagesShow(messagesDisplay[3]);
+    await showFlex(buttons[3]);
 }
-addClickHandle(buttonB, buttonBClick);
+addClickHandle(buttons[2], buttonBClick);
 /*------------------お風呂の形式-------------------------- */
 async function selectAClick(selectedText) {
-    displayUserMessage(selectedText);
-
-    hideButtons(buttons);
-
-    await displayMessagesShow(messagesDisplayE);
-    showFlex(buttons2);
-}
-addClickHandle(selectA, selectAClick); addClickHandle(selectB, selectAClick); addClickHandle(selectC, selectAClick);
+        handleSelectClick(selectedText, messagesDisplay[4], buttons[3], buttons[4]);
+    }
+addClickHandle(select[0], selectAClick); addClickHandle(select[1], selectAClick); addClickHandle(select[2], selectAClick);
 /*------------------お風呂の大きさ------------------------- */
 async function selectBClick(selectedText) {
-    displayUserMessage(selectedText);
-
-    hideButtons(buttons2);
-
-    await displayMessagesShow(messagesDisplayF);
-    showFlex(buttons3);
+    handleSelectClick(selectedText, messagesDisplay[5], buttons[4], buttons[5]);
 }
-addClickHandle(selectD, selectBClick); addClickHandle(selectE, selectBClick); addClickHandle(selectF, selectBClick);
+addClickHandle(select[3], selectBClick); addClickHandle(select[4], selectBClick); addClickHandle(select[5], selectBClick);
 /*-------------------浴槽の形-------------------------- */
 async function selectCClick(selectedText) {
-    displayUserMessage(selectedText);
-
-    hideButtons(buttons3);
-    await displayMessagesShow(messagesDisplayG);
-    showFlex(buttons4);
+    handleSelectClick(selectedText, messagesDisplay[6], buttons[5], buttons[6]);
 }
-addClickHandle(selectG, selectCClick); addClickHandle(selectH, selectCClick); addClickHandle(selectI, selectCClick);
+addClickHandle(select[6], selectCClick); addClickHandle(select[7], selectCClick); addClickHandle(select[8], selectCClick);
 /*-------------------保温機能-------------------------- */
 async function selectDClick(selectedText) {
-    displayUserMessage(selectedText);
-
-    hideButtons(buttons4);
-    await displayMessagesShow(messagesDisplayH);
-    showFlex(buttons5);
+    handleSelectClick(selectedText, messagesDisplay[7], buttons[6], buttons[7]);
 }
-addClickHandle(selectJ, selectDClick); addClickHandle(selectK, selectDClick); addClickHandle(selectL, selectDClick)
+addClickHandle(select[9], selectDClick); addClickHandle(select[10], selectDClick); addClickHandle(select[11], selectDClick);
 /*-------------------リラックス機能-------------------------- */
 async function selectEClick(selectedText) {
-    displayUserMessage(selectedText);
-
-    hideButtons(buttons5);
-    await displayMessagesShow(messagesDisplayI);
-    showFlex(buttons6);
+    handleSelectClick(selectedText, messagesDisplay[8], buttons[7], buttons[8]);
 }
-addClickHandle(selectM, selectEClick); addClickHandle(selectN, selectEClick); addClickHandle(selectO, selectEClick);
+addClickHandle(select[12], selectEClick); addClickHandle(select[13], selectEClick); addClickHandle(select[14], selectEClick);
 /*-------------------オーディオ-------------------------- */
 async function selectFClick(selectedText) {
-    displayUserMessage(selectedText);
-
-    hideButtons(buttons6);
-    await displayMessagesShow(messagesDisplayJ);
-    showFlex(buttons7);
+    handleSelectClick(selectedText, messagesDisplay[9], buttons[8], buttons[9]);
 }
-addClickHandle(selectP, selectFClick); addClickHandle(selectQ, selectFClick); addClickHandle(selectR, selectFClick);
+addClickHandle(select[15], selectFClick); addClickHandle(select[16], selectFClick); addClickHandle(select[17], selectFClick);
 /*-------------------テレビ-------------------------- */
 async function selectGClick(selectedText) {
-    displayUserMessage(selectedText);
-
-    hideButtons(buttons7);
-    await displayMessagesShow(messagesDisplayK);
-    showFlex(buttons8);
+    handleSelectClick(selectedText, messagesDisplay[10], buttons[9], buttons[10]);
 }
-addClickHandle(selectS, selectGClick); addClickHandle(selectT, selectGClick); addClickHandle(selectU, selectGClick);
+addClickHandle(select[18], selectGClick); addClickHandle(select[19], selectGClick); addClickHandle(select[20], selectGClick);
 /*-------------------照明-------------------------- */
 async function selectHClick(selectedText) {
-    displayUserMessage(selectedText);
-
-    hideButtons(buttons8);
-    await displayMessagesShow(messagesDisplayL);
-    showFlex(buttons9);
+    handleSelectClick(selectedText, messagesDisplay[11], buttons[10], buttons[11]);
 }
-addClickHandle(selectV, selectHClick); addClickHandle(selectW, selectHClick); addClickHandle(selectX, selectHClick);
+addClickHandle(select[21], selectHClick); addClickHandle(select[22], selectHClick); addClickHandle(select[23], selectHClick);
 /*-------------------追い焚き機能-------------------------- */
 async function selectIClick(selectedText) {
-    displayUserMessage(selectedText);
-
-    hideButtons(buttons9);
-    await displayMessagesShow(messagesDisplayM);
-    showFlex(buttons10);
+    handleSelectClick(selectedText, messagesDisplay[12], buttons[11], buttons[12]);
 }
-addClickHandle(selectY, selectIClick); addClickHandle(selectZ, selectIClick); addClickHandle(selectAA, selectIClick);
+addClickHandle(select[24], selectIClick); addClickHandle(select[25], selectIClick); addClickHandle(select[26], selectIClick);
 /*-------------------インターフォン-------------------------- */
 async function selectJClick(selectedText) {
-    displayUserMessage(selectedText);
-
-    hideButtons(buttons10);
-    await displayMessagesShow(messagesDisplayN);
-    showGrid(buttonArea);
+    handleSelectClick2(selectedText, messagesDisplay[13], buttons[12], select[30]);
     scrollToTop(300)
 }
-addClickHandle(selectBB, selectJClick); addClickHandle(selectCC, selectJClick); addClickHandle(selectDD, selectJClick);
+addClickHandle(select[27], selectJClick); addClickHandle(select[28], selectJClick); addClickHandle(select[29], selectJClick);
 /*-------------------北海道・東北-------------------------- */
 async function selectKClick() {
-    hideButtons(buttonArea);
-    showGrid(selectKen01);
+    handleSelectClick3(select[30], select[31]);
 }
 async function selectAAClick(selectedText) {
-    displayUserMessage(selectedText);
-    hideButtons(selectKen01);
+    handleSelectClick4(selectedText, select[31]);
 }
 /*-------------------関東-------------------------- */
 async function selectLClick() {
-    hideButtons(buttonArea);
-    showGrid(selectKen02);
+    handleSelectClick3(select[30],select[32]);
 }
 async function selectBBClick(selectedText) {
-    displayUserMessage(selectedText);
-    hideButtons(selectKen02);
+    handleSelectClick4(selectedText, select[32]);
 }
 /*-------------------北陸・甲信越-------------------------- */
 async function selectMClick() {
-    hideButtons(buttonArea);
-    showGrid(selectKen03);
+    handleSelectClick3(select[30], select[33]);
 }
 async function selectCCClick(selectedText) {
-    displayUserMessage(selectedText);
-    hideButtons(selectKen03);
+    handleSelectClick4(selectedText, select[33]);
 }
 /*-------------------東海-------------------------- */
 async function selectNClick() {
-    hideButtons(buttonArea);
-    showGrid(selectKen04);
+    handleSelectClick3(select[30], select[34]);
 }
 async function selectDDClick(selectedText) {
-    displayUserMessage(selectedText);
-    hideButtons(selectKen04);
+    handleSelectClick4(selectedText, select[34]);
 }
 /*-------------------関西-------------------------- */
 async function selectOClick() {
-    hideButtons(buttonArea);
-    showGrid(selectKen05);
+    handleSelectClick3(select[30], select[35]);
 }
 async function selectEEClick(selectedText) {
-    displayUserMessage(selectedText);
-    hideButtons(selectKen05);
+    handleSelectClick4(selectedText, select[35]);
 }
 /*-------------------中国-------------------------- */
 async function selectPClick() {
-    hideButtons(buttonArea);
-    showGrid(selectKen06);
+    handleSelectClick3(select[30], select[36]);
 }
 async function selectFFClick(selectedText) {
-    displayUserMessage(selectedText);
-    hideButtons(selectKen06);
+    handleSelectClick4(selectedText, select[36]);
 }
 /*-------------------四国-------------------------- */
 async function selectQClick() {
-    hideButtons(buttonArea);
-    showGrid(selectKen07);
+    handleSelectClick3(select[30], select[37]);
 }
 async function selectGGClick(selectedText) {
-    displayUserMessage(selectedText);
-    hideButtons(selectKen07);
+    handleSelectClick4(selectedText, select[37]);
 }
 /*-------------------九州・沖縄-------------------------- */
 async function selectRClick() {
-    hideButtons(buttonArea);
-    showGrid(selectKen08);
+    handleSelectClick3(select[30], select[38]);
 }
 async function selectHHClick(selectedText) {
-    displayUserMessage(selectedText);
-    hideButtons(selectKen08);
+    handleSelectClick4(selectedText, select[38]);
 }
-addClickHandle(selectT1, selectKClick); addClickHandle(selectT2, selectLClick); addClickHandle(selectT3, selectMClick); addClickHandle(selectT4, selectNClick); addClickHandle(selectT5, selectOClick); addClickHandle(selectT6, selectPClick); addClickHandle(selectT7, selectQClick); addClickHandle(selectT8, selectRClick);
-addClickHandle(selectKen01, selectAAClick); addClickHandle(selectKen02, selectBBClick); addClickHandle(selectKen03, selectCCClick); addClickHandle(selectKen04, selectDDClick); addClickHandle(selectKen05, selectEEClick); addClickHandle(selectKen06, selectFFClick); addClickHandle(selectKen07, selectGGClick); addClickHandle(selectKen08, selectHHClick);
+addClickHandle(select[39], selectKClick); addClickHandle(select[40], selectLClick); addClickHandle(select[41], selectMClick); addClickHandle(select[42], selectNClick); addClickHandle(select[43], selectOClick); addClickHandle(select[44], selectPClick); addClickHandle(select[45], selectQClick); addClickHandle(select[46], selectRClick);
+addClickHandle(select[31], selectAAClick); addClickHandle(select[32], selectBBClick); addClickHandle(select[33], selectCCClick); addClickHandle(select[34], selectDDClick); addClickHandle(select[35], selectEEClick); addClickHandle(select[36], selectFFClick); addClickHandle(select[37], selectGGClick); addClickHandle(select[38], selectHHClick);
 });
